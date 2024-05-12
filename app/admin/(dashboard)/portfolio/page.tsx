@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import { Button, Card, Col, Flex, Pagination, Row, Skeleton } from 'antd'
-import { v4 as uuid } from 'uuid'
 import Image from 'next/image'
 import { EditOutlined } from '@ant-design/icons'
+import Link from 'next/link'
 
 const { Meta } = Card
 
@@ -40,7 +40,7 @@ export default function Page() {
     <>
       <Row gutter={[20, 20]}>
         {data.map(item => (
-          <Col key={uuid()} span={6}>
+          <Col key={item._id} span={6}>
             <Skeleton loading={loading} active>
               <Card cover={<Image src={item.imageUrl} alt={item.title} width={300} height={200} />}>
                 <Meta title={item.title} />
@@ -52,7 +52,9 @@ export default function Page() {
 
       <Flex justify='end' className='mt-10'>
         <Button type='primary'>
-          <EditOutlined />글 작성하기
+          <Link href='/admin/portfolio/write' className='flex items-center gap-1'>
+            <EditOutlined /> 글 작성하기
+          </Link>
         </Button>
       </Flex>
 

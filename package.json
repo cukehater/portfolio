@@ -12,6 +12,7 @@
     "@ant-design/icons": "^5.3.7",
     "@ant-design/nextjs-registry": "^1.0.0",
     "@types/nodemailer": "^6.4.15",
+    "@types/uuid": "^9.0.8",
     "antd": "^5.17.3",
     "aws-sdk": "^2.1623.0",
     "mongodb": "^6.6.2",
