@@ -1,12 +1,22 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Button, Card, Col, Flex, Pagination, Row, Skeleton } from 'antd'
+import {
+  Button,
+  Card,
+  Typography,
+  Col,
+  Flex,
+  Pagination,
+  Row,
+  Skeleton
+} from 'antd'
 import Image from 'next/image'
 import { EditOutlined } from '@ant-design/icons'
 import Link from 'next/link'
 
 const { Meta } = Card
+const { Title } = Typography
 
 interface GalleryItem {
   _id: string
@@ -38,29 +48,44 @@ export default function Page() {
 
   return (
     <>
-      <Row gutter={[20, 20]}>
-        {data.map(item => (
-          <Col key={item._id} span={6}>
-            <Skeleton loading={loading} active>
-              <Card cover={<Image src={item.imageUrl} alt={item.title} width={300} height={200} />}>
-                <Meta title={item.title} />
-              </Card>
-            </Skeleton>
-          </Col>
-        ))}
-      </Row>
+      <Title level={2}>포트폴리오</Title>
+      <Card>
+        <Row gutter={[15, 15]}>
+          {data.map(item => (
+            <Col key={item._id} span={4}>
+              <Skeleton loading={loading} active>
+                <Card
+                  cover={
+                    <Image
+                      src={item.imageUrl}
+                      alt={item.title}
+                      width={300}
+                      height={200}
+                    />
+                  }
+                >
+                  <Meta title={item.title} />
+                </Card>
+              </Skeleton>
+            </Col>
+          ))}
+        </Row>
 
-      <Flex justify='end' className='mt-10'>
-        <Button type='primary'>
-          <Link href='/admin/portfolio/write' className='flex items-center gap-1'>
-            <EditOutlined /> 글 작성하기
-          </Link>
-        </Button>
-      </Flex>
+        <Flex justify='end' className='mt-10'>
+          <Button type='primary'>
+            <Link
+              href='/admin/portfolio/write'
+              className='flex items-center gap-1'
+            >
+              <EditOutlined /> 글 작성하기
+            </Link>
+          </Button>
+        </Flex>
 
-      <Flex justify='center' className='mt-10'>
-        <Pagination defaultCurrent={1} total={50} />
-      </Flex>
+        <Flex justify='center' className='mt-10'>
+          <Pagination defaultCurrent={1} total={50} />
+        </Flex>
+      </Card>
     </>
   )
 }

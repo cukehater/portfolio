@@ -63,9 +63,7 @@ const items: MenuItem[] = [
 
 export default function Sidebar() {
   const pathname = usePathname()
-  console.log('pathname', pathname)
   const [current, setCurrent] = useState('/admin/fundamental')
-  console.log('current', current)
 
   const handleClick: MenuProps['onClick'] = e => {
     setCurrent(e.key)

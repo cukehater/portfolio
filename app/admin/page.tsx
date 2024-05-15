@@ -12,11 +12,11 @@ type FieldType = {
 }
 
 const onFinish: FormProps<FieldType>['onFinish'] = values => {
-  console.log('Success:', values)
+  // console.log('Success:', values)
 }
 
 const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = errorInfo => {
-  console.log('Failed:', errorInfo)
+  // console.log('Failed:', errorInfo)
 }
 
 export default function page() {
@@ -51,11 +51,18 @@ export default function page() {
             <Input.Password />
           </Form.Item>
 
-          <Form.Item<FieldType> name='remember' valuePropName='checked' wrapperCol={{ offset: 8, span: 16 }}>
+          <Form.Item<FieldType>
+            name='remember'
+            valuePropName='checked'
+            wrapperCol={{ offset: 8, span: 16 }}
+          >
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
 
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }} style={{ marginBottom: 0 }}>
+          <Form.Item
+            wrapperCol={{ offset: 8, span: 16 }}
+            style={{ marginBottom: 0 }}
+          >
             <Button type='primary' htmlType='submit'>
               로그인
             </Button>
