@@ -1,10 +1,15 @@
 import { connectDB } from '@/utils/db'
-import { NextResponse } from 'next/server'
+import { ObjectId } from 'mongodb'
+import { NextRequest, NextResponse } from 'next/server'
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
+    const id = req.nextUrl.searchParams.get('id')
+
     const db = (await connectDB).db('portfolio')
-    const data = await db.collection('gallery').find().toArray()
+    const data = id
+      ? await db.collection('gallery').findOne({ _id: new ObjectId(id) })
+      : await db.collection('gallery').find().toArray()
 
     return NextResponse.json({ message: 'Success', data }, { status: 200 })
   } catch (error: any) {

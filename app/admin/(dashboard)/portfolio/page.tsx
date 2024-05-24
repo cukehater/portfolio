@@ -1,21 +1,12 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import {
-  Button,
-  Card,
-  Typography,
-  Col,
-  Flex,
-  Pagination,
-  Row,
-  Skeleton
-} from 'antd'
+import { Button, Card, Typography, Flex, Pagination, Row } from 'antd'
 import Image from 'next/image'
 import { EditOutlined } from '@ant-design/icons'
 import Link from 'next/link'
+import PortfolioCard from '../../components/layout/PortfolioCard'
 
-const { Meta } = Card
 const { Title } = Typography
 
 interface GalleryItem {
@@ -29,7 +20,6 @@ interface GalleryItem {
 
 export default function Page() {
   const [data, setData] = useState<GalleryItem[] | null>(null)
-  const [loading, setLoading] = useState<boolean>(false)
 
   const fetchData = async () => {
     try {
@@ -48,26 +38,11 @@ export default function Page() {
 
   return (
     <>
-      <Title level={2}>포트폴리오</Title>
+      <Title level={2}>게시판</Title>
       <Card>
         <Row gutter={[15, 15]}>
           {data.map(item => (
-            <Col key={item._id} span={4}>
-              <Skeleton loading={loading} active>
-                <Card
-                  cover={
-                    <Image
-                      src={item.imageUrl}
-                      alt={item.title}
-                      width={300}
-                      height={200}
-                    />
-                  }
-                >
-                  <Meta title={item.title} />
-                </Card>
-              </Skeleton>
-            </Col>
+            <PortfolioCard key={item._id} item={item} />
           ))}
         </Row>
 

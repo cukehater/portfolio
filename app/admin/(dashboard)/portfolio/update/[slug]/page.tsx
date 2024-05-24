@@ -13,15 +13,41 @@ import {
   Typography,
   Card
 } from 'antd'
+import { Option } from 'antd/es/mentions'
 import { useRouter } from 'next/navigation'
+import { useCallback, useEffect, useState } from 'react'
 
 const { RangePicker } = DatePicker
 const { TextArea } = Input
 const { Title } = Typography
-const { Option } = Select
 
-export default function FormDisabledDemo() {
+interface Props {
+  params: {
+    slug: string
+  }
+}
+
+interface GalleryItem {
+  _id: string
+  title: string
+  category: string
+  imageUrl: string
+  startDate: string
+  endDate: string
+}
+
+export default function Page({ params: slug }: Props) {
+  const id = slug.slug
   const router = useRouter()
+  const [data, setData] = useState<GalleryItem>()
+
+  const fetchData = useCallback(async () => {
+    const { data } = await fetch(`/api/gallery/read?id=${id}`).then(res =>
+      res.json()
+    )
+    setData(data)
+  }, [id])
+
   const handleFinish = async (values: any) => {
     try {
       const response = await fetch('/api/gallery/create', {
@@ -37,6 +63,12 @@ export default function FormDisabledDemo() {
     }
   }
 
+  useEffect(() => {
+    fetchData()
+  }, [fetchData])
+
+  if (!data) return null
+
   return (
     <>
       <Title level={2}>게시판</Title>
@@ -45,7 +77,7 @@ export default function FormDisabledDemo() {
       <Card
         title={
           <Title level={5} className='mb-0'>
-            ⚙️ 게시판 게시글 작성
+            ⚙️ 게시판 게시글 수정
           </Title>
         }
         className='mt-4 rounded-xl'
@@ -57,7 +89,7 @@ export default function FormDisabledDemo() {
           onFinish={handleFinish}
         >
           <Form.Item
-            label='제목'
+            label={data.title}
             name='title'
             rules={[{ required: true, message: '제목을 입력해 주세요.' }]}
           >
@@ -131,7 +163,7 @@ export default function FormDisabledDemo() {
 
           <Form.Item className='flex justify-end'>
             <Button type='primary' htmlType='submit'>
-              등록하기
+              수정하기
             </Button>
           </Form.Item>
         </Form>

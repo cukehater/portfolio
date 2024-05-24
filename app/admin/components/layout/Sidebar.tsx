@@ -51,7 +51,7 @@ const items: MenuItem[] = [
   //   <CopyOutlined />
   // ),
   getItem(
-    <Link href='/admin/portfolio'>포트폴리오</Link>,
+    <Link href='/admin/portfolio'>게시판</Link>,
     '/admin/portfolio',
     <CopyOutlined />
   )
