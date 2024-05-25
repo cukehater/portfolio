@@ -30,11 +30,9 @@ export default function PortfolioCard({ item }: Props) {
   return (
     <Col key={item._id} span={4}>
       <Skeleton loading={loading} active>
-        <Link
-          href={`/admin/portfolio/update/${item._id.toString()}`}
-          className='cursor-pointer'
-        >
+        <Link href={`/admin/portfolio/update/${item._id.toString()}`}>
           <Card
+            hoverable
             cover={
               <Image
                 src={item.imageUrl}
@@ -44,6 +42,7 @@ export default function PortfolioCard({ item }: Props) {
               />
             }
             className='rounded-lg'
+            bodyStyle={{ padding: '16px' }}
           >
             <Meta title={item.title} />
           </Card>

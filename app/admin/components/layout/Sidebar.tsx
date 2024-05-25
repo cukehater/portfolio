@@ -35,11 +35,11 @@ const items: MenuItem[] = [
   //   '/admin/account',
   //   <UserOutlined />
   // ),
-  // getItem(
-  //   <Link href='/admin/fundamental'>웹사이트 설정</Link>, //
-  //   '/admin/fundamental',
-  //   <SettingOutlined />
-  // ),
+  getItem(
+    <Link href='/admin/fundamental'>웹사이트 설정</Link>, //
+    '/admin/fundamental',
+    <SettingOutlined />
+  ),
   // getItem(
   //   <Link href='/admin/banners'>배너 관리</Link>,
   //   '/admin/banners',

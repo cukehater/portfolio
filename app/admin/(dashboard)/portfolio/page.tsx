@@ -1,11 +1,12 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Button, Card, Typography, Flex, Pagination, Row } from 'antd'
-import Image from 'next/image'
+import { Button, Row, Typography } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
 import Link from 'next/link'
 import PortfolioCard from '../../components/layout/PortfolioCard'
+import CommonTitle from '../../components/shared/CommonTitle'
+import CardContainer from '../../components/layout/CardContainer'
 
 const { Title } = Typography
 
@@ -38,29 +39,20 @@ export default function Page() {
 
   return (
     <>
-      <Title level={2}>게시판</Title>
-      <Card>
+      <CommonTitle title='게시판' />
+      <CardContainer hasTitle={false}>
         <Row gutter={[15, 15]}>
           {data.map(item => (
             <PortfolioCard key={item._id} item={item} />
           ))}
         </Row>
+      </CardContainer>
 
-        <Flex justify='end' className='mt-10'>
-          <Button type='primary'>
-            <Link
-              href='/admin/portfolio/write'
-              className='flex items-center gap-1'
-            >
-              <EditOutlined /> 글 작성하기
-            </Link>
-          </Button>
-        </Flex>
-
-        <Flex justify='center' className='mt-10'>
-          <Pagination defaultCurrent={1} total={50} />
-        </Flex>
-      </Card>
+      <Button type='primary' className='mt-8 block ml-auto'>
+        <Link href='/admin/portfolio/write' className='flex items-center gap-1'>
+          <EditOutlined /> 글 작성하기
+        </Link>
+      </Button>
     </>
   )
 }
