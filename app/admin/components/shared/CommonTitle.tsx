@@ -6,7 +6,7 @@ export default function CommonTitle({ title }: { title: string }) {
   return (
     <>
       <Typography.Title level={2} className='flex items-center gap-3'>
-        <Image src={Logo} width={100} alt='회사 로고' />
+        <Image src={Logo} height={25} alt='회사 로고' />
         {title}
       </Typography.Title>
     </>

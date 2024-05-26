@@ -24,7 +24,7 @@ export default function FormDisabledDemo() {
   return (
     <>
       <CommonTitle title='게시판' />
-      <PortfolioForm onFinish={handleFinish} />
+      <PortfolioForm onFinish={handleFinish} isWrite />
     </>
   )
 }

@@ -46,7 +46,6 @@ export default function Page({ params: slug }: Props) {
   const id = slug.slug
   const router = useRouter()
   const [data, setData] = useState<GalleryItem>()
-  console.log('data', data)
 
   const fetchData = useCallback(async () => {
     const { data } = await fetch(`/api/gallery/read?id=${id}`).then(res =>

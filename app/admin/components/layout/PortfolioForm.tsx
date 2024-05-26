@@ -12,14 +12,21 @@ import CardContainer from '../layout/CardContainer'
 import FormContainer from '../layout/FormContainer'
 import { selectAfter, selectBefore } from '../shared/SelectAfterBefore'
 import { normFile } from '@/utils/normFile'
+import { useParams } from 'next/navigation'
 
 export default function PortfolioForm({
-  onFinish
+  onFinish,
+  isWrite
 }: {
   onFinish: (values: any) => Promise<void>
+  isWrite?: boolean
 }) {
   return (
-    <FormContainer onFinish={onFinish} submitBtnText='등록하기'>
+    <FormContainer
+      onFinish={onFinish}
+      submitBtnText='등록하기'
+      isWrite={isWrite}
+    >
       <CardContainer title='⚙️ 게시판 글 작성'>
         <div className='max-w-[600px]'>
           <Form.Item
