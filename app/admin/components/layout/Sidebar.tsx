@@ -30,11 +30,16 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  // getItem(
-  //   <Link href='/admin/account'>관리자 정보</Link>,
-  //   '/admin/account',
-  //   <UserOutlined />
-  // ),
+  getItem('관리자 설정', '', <UserOutlined />, [
+    getItem(
+      <Link href='/admin/account/create'>관리자 계정 생성</Link>,
+      '/admin/account/create'
+    ),
+    getItem(
+      <Link href='/admin/account/list'>관리자 계정 관리</Link>,
+      '/admin/account/list'
+    )
+  ]),
   getItem(
     <Link href='/admin/fundamental'>웹사이트 설정</Link>, //
     '/admin/fundamental',
