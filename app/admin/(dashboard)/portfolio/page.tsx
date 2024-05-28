@@ -7,6 +7,8 @@ import Link from 'next/link'
 import PortfolioCard from '../../components/layout/PortfolioCard'
 import CommonTitle from '../../components/shared/CommonTitle'
 import CardContainer from '../../components/layout/CardContainer'
+import FormButtons from '../../components/shared/FormButtons'
+import { useRouter } from 'next/navigation'
 
 const { Title } = Typography
 
@@ -20,6 +22,7 @@ interface GalleryItem {
 }
 
 export default function Page() {
+  const router = useRouter()
   const [data, setData] = useState<GalleryItem[] | null>(null)
 
   const fetchData = async () => {
@@ -48,11 +51,12 @@ export default function Page() {
         </Row>
       </CardContainer>
 
-      <Button type='primary' className='mt-8 block ml-auto'>
-        <Link href='/admin/portfolio/write' className='flex items-center gap-1'>
-          <EditOutlined /> 글 작성하기
-        </Link>
-      </Button>
+      <FormButtons
+        text='글 작성하기'
+        onClick={() => {
+          router.push('/admin/portfolio/write')
+        }}
+      />
     </>
   )
 }

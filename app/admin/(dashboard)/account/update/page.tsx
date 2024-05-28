@@ -12,13 +12,17 @@ export default function Page() {
       <CommonTitle title='관리자 설정' />
 
       <FormContainer>
-        <CardContainer title='⚙️ 관리자 계정 생성'>
+        <CardContainer title='⚙️ 관리자 계정 수정'>
           <div className='max-w-[600px]'>
             <Form.Item label='아이디' name='userId'>
               <Input placeholder='아이디를 입력해 주세요' allowClear />
             </Form.Item>
 
-            <Form.Item label='비밀번호' name='userPassword'>
+            <Form.Item label='현재 비밀번호' name='currentPassword'>
+              <Input.Password placeholder='비밀번호를 입력해 주세요' />
+            </Form.Item>
+
+            <Form.Item label='새 비밀번호' name='userPassword'>
               <Input.Password placeholder='비밀번호를 입력해 주세요' />
               <Input.Password
                 placeholder='비밀번호를 한번 더 입력해 주세요'
@@ -27,7 +31,7 @@ export default function Page() {
             </Form.Item>
           </div>
         </CardContainer>
-        <FormButtons text='생성하기' />
+        <FormButtons text='수정하기' />
       </FormContainer>
     </>
   )

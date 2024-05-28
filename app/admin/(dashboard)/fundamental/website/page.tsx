@@ -1,63 +1,24 @@
 'use client'
 
-import { Input, Tooltip, Form, Switch, Upload, Flex } from 'antd'
-import { InfoCircleOutlined, PlusOutlined } from '@ant-design/icons'
-import FormContainer from '../../components/layout/FormContainer'
-import CardContainer from '../../components/layout/CardContainer'
-import CommonTitle from '../../components/shared/CommonTitle'
+import CardContainer from '@/app/admin/components/layout/CardContainer'
+import FormContainer from '@/app/admin/components/layout/FormContainer'
+import CommonTitle from '@/app/admin/components/shared/CommonTitle'
+import FormButtons from '@/app/admin/components/shared/FormButtons'
 import {
   selectAfter,
   selectBefore
-} from '../../components/shared/SelectAfterBefore'
+} from '@/app/admin/components/shared/SelectAfterBefore'
 import { normFile } from '@/utils/normFile'
+import { InfoCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import { Form, Input, Switch, Tooltip, Upload } from 'antd'
 
-export default function FundamentalPage() {
+export default function Page() {
   return (
     <>
       <CommonTitle title='웹사이트 설정' />
 
-      <FormContainer submitBtnText='저장하기'>
-        {/* 업체 정보 */}
-        <CardContainer title='🛠️ 회사 정보 설정'>
-          <div className='max-w-[600px]'>
-            <Form.Item label='업체명'>
-              <Input placeholder='업체명을 입력해 주세요' allowClear />
-            </Form.Item>
-
-            <Form.Item label='대표명'>
-              <Input placeholder='대표명을 입력해 주세요' allowClear />
-            </Form.Item>
-
-            <Form.Item label='사업자번호'>
-              <Input
-                placeholder='하이픈(-)을 포함하여 입력해 주세요'
-                allowClear
-              />
-            </Form.Item>
-
-            <Form.Item label='전화번호'>
-              <Input
-                placeholder='하이픈(-)을 포함하여 입력해 주세요'
-                allowClear
-              />
-            </Form.Item>
-
-            <Form.Item label='팩스'>
-              <Input placeholder='팩스 번호를 입력해 주세요' allowClear />
-            </Form.Item>
-
-            <Form.Item label='이메일'>
-              <Input placeholder='이메일을 입력해 주세요' allowClear />
-            </Form.Item>
-
-            <Form.Item label='사업장 주소'>
-              <Input placeholder='사업장 주소를 입력해 주세요' allowClear />
-            </Form.Item>
-          </div>
-        </CardContainer>
-
-        {/* 사이트 정보 */}
-        <CardContainer title='🛠️ 사이트 정보 설정'>
+      <FormContainer>
+        <CardContainer title='⚙️ 사이트 정보 설정'>
           <div className='max-w-[600px]'>
             <Form.Item label='웹사이트 명'>
               <Input placeholder='웹사이트 명을 입력해 주세요' allowClear />
@@ -131,6 +92,8 @@ export default function FundamentalPage() {
             </Form.Item>
           </div>
         </CardContainer>
+
+        <FormButtons text='저장하기' />
       </FormContainer>
     </>
   )

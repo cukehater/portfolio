@@ -5,9 +5,10 @@ import { useParams, useRouter } from 'next/navigation'
 interface Props {
   text: string
   deleteApi?: string
+  onClick?: () => void
 }
 
-export default function FormButtons({ text, deleteApi }: Props) {
+export default function FormButtons({ text, deleteApi, onClick }: Props) {
   const router = useRouter()
   const { slug } = useParams()
 
@@ -27,6 +28,7 @@ export default function FormButtons({ text, deleteApi }: Props) {
         htmlType='submit'
         className='flex items-center'
         shape='round'
+        onClick={onClick}
       >
         <EditOutlined />
         {text}

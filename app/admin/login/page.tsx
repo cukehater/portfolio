@@ -19,7 +19,7 @@ const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = errorInfo => {
   // console.log('Failed:', errorInfo)
 }
 
-export default function page() {
+export default function Page() {
   return (
     <section className='min-h-screen flex items-center justify-center'>
       <article className='w-[500px] bg-white rounded-2xl shadow-xl p-12'>

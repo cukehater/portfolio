@@ -3,53 +3,59 @@
 import CardContainer from '@/app/admin/components/layout/CardContainer'
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
 import ConfirmModal from '@/app/admin/components/shared/ConfirmModal'
-import { Button, Flex, Popconfirm, Table, TableProps } from 'antd'
+import { Button, Flex, Table, TableProps } from 'antd'
 import Link from 'next/link'
+import { v4 as uuid } from 'uuid'
 
 interface DataType {
   key: string
-  name: string
-  code: string
-  count: number
+  userId: string
 }
+
+const data: DataType[] = [
+  {
+    key: uuid(),
+    userId: 'admin'
+  },
+  {
+    key: uuid(),
+    userId: 'admin'
+  },
+  {
+    key: uuid(),
+    userId: 'admin'
+  },
+  {
+    key: uuid(),
+    userId: 'admin'
+  },
+  {
+    key: uuid(),
+    userId: 'admin'
+  }
+]
 
 const columns: TableProps<DataType>['columns'] = [
   {
-    title: '그룹명',
-    dataIndex: 'name',
-    key: 'name',
-    align: 'center',
-    render: text => <Link href='/admin/writer'>{text}</Link>
-  },
-  {
-    title: '그룹 코드',
-    dataIndex: 'code',
-    key: 'code',
-    width: 300,
-    align: 'center',
-    render: text => <p>{text}</p>
-  },
-  {
-    title: '개수',
-    dataIndex: 'count',
-    key: 'count',
-    width: 200,
-    align: 'center',
-    render: text => <p>{text}</p>
+    title: '아이디',
+    dataIndex: 'userId',
+    key: 'userId',
+    align: 'center'
+    // render: text => <Link href='/admin/writer'>{text}</Link>
   },
   {
     title: '수정 / 삭제',
     key: 'action',
-    width: 400,
+    width: 500,
     align: 'center',
     render: () => (
       <Flex gap='small' justify='center'>
         <Button>
-          <Link href='/admin/writer'>수정</Link>
+          <Link href={`/admin/account/update`}>수정</Link>
         </Button>
         <ConfirmModal
           title='삭제'
-          description='페이지를 정말 삭제하시겠습니까?'
+          description='계정을 삭제하시겠습니까?'
           okText='네'
           cancelText='아니오'
         />
@@ -58,22 +64,7 @@ const columns: TableProps<DataType>['columns'] = [
   }
 ]
 
-const data: DataType[] = [
-  {
-    key: '1',
-    name: '메인비주얼',
-    code: 'mainvisual',
-    count: 3
-  },
-  {
-    key: '2',
-    name: '서브비주얼',
-    code: 'subvisual',
-    count: 3
-  }
-]
-
-export default function page() {
+export default function Page() {
   return (
     <>
       <CommonTitle title='관리자 설정' />

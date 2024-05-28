@@ -30,45 +30,46 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem('관리자 설정', '', <UserOutlined />, [
-    getItem(
-      <Link href='/admin/account/create'>관리자 계정 생성</Link>,
-      '/admin/account/create'
-    ),
-    getItem(
-      <Link href='/admin/account/list'>관리자 계정 관리</Link>,
-      '/admin/account/list'
-    )
-  ]),
   getItem(
-    <Link href='/admin/fundamental'>웹사이트 설정</Link>, //
+    '웹 사이트 설정', //
     '/admin/fundamental',
-    <SettingOutlined />
+    <SettingOutlined />,
+    [
+      getItem(
+        <Link href='/admin/fundamental/company'>회사 정보 설정</Link>,
+        '/admin/fundamental/company'
+      ),
+      getItem(
+        <Link href='/admin/fundamental/website'>사이트 정보 설정</Link>,
+        '/admin/fundamental/website'
+      )
+    ]
   ),
-  // getItem(
-  //   <Link href='/admin/banners'>배너 관리</Link>,
-  //   '/admin/banners',
-  //   <DesktopOutlined />
-  // ),
-  // getItem(
-  //   <Link href='/admin/edits'>페이지 관리</Link>,
-  //   '/admin/edits',
-  //   <CopyOutlined />
-  // ),
+  getItem(
+    '관리자 설정', //
+    '/admin/account',
+    <UserOutlined />,
+    [
+      getItem(
+        <Link href='/admin/account/create'>관리자 계정 생성</Link>,
+        '/admin/account/create'
+      ),
+      getItem(
+        <Link href='/admin/account/list'>관리자 계정 관리</Link>,
+        '/admin/account/list'
+      )
+    ]
+  ),
   getItem(
     <Link href='/admin/portfolio'>게시판</Link>,
     '/admin/portfolio',
     <CopyOutlined />
   )
-  // getItem('게시판 관리', '', <CopyOutlined />, [
-  //   getItem(<Link href='/admin/board1'>일반 게시판</Link>, '/admin/board1'),
-  //   getItem(<Link href='/admin/board2'>갤러리 게시판</Link>, '/admin/board2')
-  // ])
 ]
 
 export default function Sidebar() {
   const pathname = usePathname()
-  const [current, setCurrent] = useState('/admin/fundamental')
+  const [current, setCurrent] = useState('/admin/fundamental/company')
 
   const handleClick: MenuProps['onClick'] = e => {
     setCurrent(e.key)
@@ -91,6 +92,8 @@ export default function Sidebar() {
         theme='dark'
         items={items}
         mode='inline'
+        defaultSelectedKeys={['/admin/fundamental']}
+        defaultOpenKeys={['/admin/fundamental']}
         selectedKeys={[current]}
         onClick={handleClick}
       />
