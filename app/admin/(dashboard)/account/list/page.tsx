@@ -1,6 +1,6 @@
 'use client'
 
-import CardContainer from '@/app/admin/components/layout/CardContainer'
+import CardContainer from '@/app/admin/components/shared/CardContainer'
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
 import ConfirmModal from '@/app/admin/components/shared/ConfirmModal'
 import { Button, Flex, Table, TableProps } from 'antd'
@@ -46,7 +46,7 @@ const columns: TableProps<DataType>['columns'] = [
   {
     title: '수정 / 삭제',
     key: 'action',
-    width: 500,
+    width: 300,
     align: 'center',
     render: () => (
       <Flex gap='small' justify='center'>

@@ -1,6 +1,6 @@
 'use client'
 
-import PortfolioForm from '@/app/admin/components/layout/PortfolioForm'
+import PortfolioForm from '@/app/admin/components/shared/PortfolioForm'
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
 import {
   selectAfter,
@@ -23,6 +23,7 @@ import {
 import dayjs from 'dayjs'
 import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
+import FormButtons from '@/app/admin/components/shared/FormButtons'
 
 const { Title } = Typography
 
@@ -78,7 +79,12 @@ export default function Page({ params: slug }: Props) {
   return (
     <>
       <CommonTitle title='게시판' />
-      <PortfolioForm onFinish={handleFinish} />
+      <PortfolioForm
+        onFinish={handleFinish}
+        buttons={
+          <FormButtons text='글 작성하기' deleteApi='/api/gallery/delete/' />
+        }
+      />
     </>
   )
 }

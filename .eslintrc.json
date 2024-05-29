@@ -1,3 +1,53 @@
 {
-  "extends": "next/core-web-vitals"
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["react-app", "react-app/jest"],
+  "plugins": ["react"],
+  "settings": {
+    "import/resolver": {}
+  },
+  "rules": {
+    "import/order": [
+      "warn",
+      {
+        "groups": [
+          ["builtin", "external"],
+          "internal",
+          ["parent", "sibling", "index"]
+        ],
+        "pathGroups": [
+          {
+            "pattern": "{react,react-*}",
+            "group": "builtin",
+            "position": "before"
+          },
+          {
+            "pattern": "{common/**,components,components/**,store/**}",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "{./components/**,**/config}",
+            "group": "internal"
+          },
+          {
+            "pattern": "{styles,./*.css,../*.css,./*.module.css,../*.module.css}",
+            "group": "index"
+          },
+          {
+            "pattern": "{assets/**/*.png,assets/*/*.jpg,assets/*/*.jpeg,assets/*/*.gif}",
+            "group": "index"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "newlines-between": "always"
+      }
+    ]
+  }
 }

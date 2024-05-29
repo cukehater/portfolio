@@ -1,7 +1,8 @@
 'use client'
 
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
-import PortfolioForm from '@/app/admin/components/layout/PortfolioForm'
+import FormButtons from '@/app/admin/components/shared/FormButtons'
+import PortfolioForm from '@/app/admin/components/shared/PortfolioForm'
 import { useRouter } from 'next/navigation'
 
 export default function FormDisabledDemo() {
@@ -24,7 +25,10 @@ export default function FormDisabledDemo() {
   return (
     <>
       <CommonTitle title='게시판' />
-      <PortfolioForm onFinish={handleFinish} isWrite />
+      <PortfolioForm
+        onFinish={handleFinish}
+        buttons={<FormButtons text='글 작성하기' />}
+      />
     </>
   )
 }

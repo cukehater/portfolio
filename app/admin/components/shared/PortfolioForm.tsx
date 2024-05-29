@@ -8,25 +8,20 @@ import {
   Slider,
   Upload
 } from 'antd'
-import CardContainer from '../layout/CardContainer'
-import FormContainer from '../layout/FormContainer'
+import CardContainer from '../shared/CardContainer'
+import FormContainer from './FormContainer'
 import { selectAfter, selectBefore } from '../shared/SelectAfterBefore'
 import { normFile } from '@/utils/normFile'
-import { useParams } from 'next/navigation'
 
 export default function PortfolioForm({
   onFinish,
-  isWrite
+  buttons
 }: {
   onFinish: (values: any) => Promise<void>
-  isWrite?: boolean
+  buttons: React.ReactNode
 }) {
   return (
-    <FormContainer
-      onFinish={onFinish}
-      submitBtnText='등록하기'
-      isWrite={isWrite}
-    >
+    <FormContainer onFinish={onFinish}>
       <CardContainer title='⚙️ 게시판 글 작성'>
         <div className='max-w-[600px]'>
           <Form.Item
@@ -108,6 +103,8 @@ export default function PortfolioForm({
           </Form.Item>
         </div>
       </CardContainer>
+
+      {buttons}
     </FormContainer>
   )
 }

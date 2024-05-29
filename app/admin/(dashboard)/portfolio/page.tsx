@@ -1,12 +1,10 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Button, Row, Typography } from 'antd'
-import { EditOutlined } from '@ant-design/icons'
-import Link from 'next/link'
-import PortfolioCard from '../../components/layout/PortfolioCard'
+import { Row, Typography } from 'antd'
+import PortfolioCard from '../../components/shared/PortfolioCard'
 import CommonTitle from '../../components/shared/CommonTitle'
-import CardContainer from '../../components/layout/CardContainer'
+import CardContainer from '../../components/shared/CardContainer'
 import FormButtons from '../../components/shared/FormButtons'
 import { useRouter } from 'next/navigation'
 

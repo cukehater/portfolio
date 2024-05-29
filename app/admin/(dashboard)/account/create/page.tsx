@@ -1,7 +1,7 @@
 'use client'
 
-import CardContainer from '@/app/admin/components/layout/CardContainer'
-import FormContainer from '@/app/admin/components/layout/FormContainer'
+import CardContainer from '@/app/admin/components/shared/CardContainer'
+import FormContainer from '@/app/admin/components/shared/FormContainer'
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
 import FormButtons from '@/app/admin/components/shared/FormButtons'
 import { Input, Form } from 'antd'
