@@ -2,30 +2,9 @@
 
 import PortfolioForm from '@/app/admin/components/shared/PortfolioForm'
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
-import {
-  selectAfter,
-  selectBefore
-} from '@/app/admin/components/shared/SelectAfterBefore'
-import { normFile } from '@/utils/normFile'
-import { PlusOutlined } from '@ant-design/icons'
-import {
-  Button,
-  ColorPicker,
-  DatePicker,
-  Form,
-  Input,
-  Select,
-  Slider,
-  Upload,
-  Typography,
-  Card
-} from 'antd'
-import dayjs from 'dayjs'
 import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import FormButtons from '@/app/admin/components/shared/FormButtons'
-
-const { Title } = Typography
 
 interface Props {
   params: {
@@ -33,20 +12,10 @@ interface Props {
   }
 }
 
-interface GalleryItem {
-  _id: string
-  title: string
-  category: string
-  period: string[]
-  contribution: number
-  brandColor: any
-  imageUrl: string
-}
-
 export default function Page({ params: slug }: Props) {
   const id = slug.slug
   const router = useRouter()
-  const [data, setData] = useState<GalleryItem>()
+  const [data, setData] = useState<PortfolioItem>()
 
   const fetchData = useCallback(async () => {
     const { data } = await fetch(`/api/gallery/read?id=${id}`).then(res =>
@@ -81,8 +50,9 @@ export default function Page({ params: slug }: Props) {
       <CommonTitle title='게시판' />
       <PortfolioForm
         onFinish={handleFinish}
+        data={data}
         buttons={
-          <FormButtons text='글 작성하기' deleteApi='/api/gallery/delete/' />
+          <FormButtons text='글 수정하기' deleteApi='/api/gallery/delete/' />
         }
       />
     </>

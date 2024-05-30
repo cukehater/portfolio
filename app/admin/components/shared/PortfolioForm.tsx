@@ -1,3 +1,4 @@
+'use client'
 import { PlusOutlined } from '@ant-design/icons'
 import {
   ColorPicker,
@@ -9,19 +10,41 @@ import {
   Upload
 } from 'antd'
 import CardContainer from '../shared/CardContainer'
-import FormContainer from './FormContainer'
 import { selectAfter, selectBefore } from '../shared/SelectAfterBefore'
 import { normFile } from '@/utils/normFile'
-
-export default function PortfolioForm({
-  onFinish,
-  buttons
-}: {
+import { useEffect, useState } from 'react'
+import dayjs from 'dayjs'
+interface Props {
   onFinish: (values: any) => Promise<void>
+  data?: PortfolioItem
   buttons: React.ReactNode
-}) {
+}
+
+export default function PortfolioForm({ onFinish, data, buttons }: Props) {
+  const [initData, setInitData] = useState({})
+
+  if (data) {
+    console.log(data.brandColor)
+  }
+
+  useEffect(() => {
+    if (!data) return
+    setInitData(() => ({
+      ...data,
+      period: [dayjs(data.period[0]), dayjs(data.period[1])]
+    }))
+  }, [])
+
+  if (data && Object.keys(initData).length === 0) return null
+
   return (
-    <FormContainer onFinish={onFinish}>
+    <Form
+      onFinish={onFinish}
+      labelCol={{ span: 6 }}
+      wrapperCol={{ span: 18 }}
+      labelAlign='left'
+      initialValues={initData}
+    >
       <CardContainer title='⚙️ 게시판 글 작성'>
         <div className='max-w-[600px]'>
           <Form.Item
@@ -66,14 +89,13 @@ export default function PortfolioForm({
             name='brandColor'
             rules={[{ required: true, message: '브랜드 컬러를 입력해 주세요' }]}
           >
-            <ColorPicker format='hex' showText />
+            <ColorPicker showText />
           </Form.Item>
 
           <Form.Item label='주소' name='link'>
             <Input
               addonBefore={selectBefore}
               addonAfter={selectAfter}
-              defaultValue=''
               placeholder='도메인을 입력해 주세요'
               allowClear
             />
@@ -105,6 +127,6 @@ export default function PortfolioForm({
       </CardContainer>
 
       {buttons}
-    </FormContainer>
+    </Form>
   )
 }

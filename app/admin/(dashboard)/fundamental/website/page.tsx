@@ -1,7 +1,6 @@
 'use client'
 
 import CardContainer from '@/app/admin/components/shared/CardContainer'
-import FormContainer from '@/app/admin/components/shared/FormContainer'
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
 import FormButtons from '@/app/admin/components/shared/FormButtons'
 import {
@@ -17,7 +16,7 @@ export default function Page() {
     <>
       <CommonTitle title='웹사이트 설정' />
 
-      <FormContainer>
+      <Form labelCol={{ span: 6 }} wrapperCol={{ span: 18 }} labelAlign='left'>
         <CardContainer title='⚙️ 사이트 정보 설정'>
           <div className='max-w-[600px]'>
             <Form.Item label='웹사이트 명'>
@@ -94,7 +93,7 @@ export default function Page() {
         </CardContainer>
 
         <FormButtons text='저장하기' />
-      </FormContainer>
+      </Form>
     </>
   )
 }

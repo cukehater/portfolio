@@ -1,7 +1,6 @@
 'use client'
 
 import CardContainer from '@/app/admin/components/shared/CardContainer'
-import FormContainer from '@/app/admin/components/shared/FormContainer'
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
 import FormButtons from '@/app/admin/components/shared/FormButtons'
 import { Input, Form } from 'antd'
@@ -11,7 +10,7 @@ export default function Page() {
     <>
       <CommonTitle title='관리자 설정' />
 
-      <FormContainer>
+      <Form labelCol={{ span: 6 }} wrapperCol={{ span: 18 }} labelAlign='left'>
         <CardContainer title='⚙️ 관리자 계정 수정'>
           <div className='max-w-[600px]'>
             <Form.Item label='아이디' name='userId'>
@@ -32,7 +31,7 @@ export default function Page() {
           </div>
         </CardContainer>
         <FormButtons text='수정하기' />
-      </FormContainer>
+      </Form>
     </>
   )
 }
