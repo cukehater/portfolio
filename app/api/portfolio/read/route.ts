@@ -1,16 +1,19 @@
 import { connectDB } from '@/utils/db'
+import { ObjectId } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'
 
-export async function POST(req: NextRequest) {
+export async function GET(req: NextRequest) {
   try {
-    const data = await req.json()
+    const id = req.nextUrl.searchParams.get('id')
+
     const db = (await connectDB).db('portfolio')
-    await db.collection('gallery').insertOne(data)
+    const data = id
+      ? await db.collection('portfolio').findOne({ _id: new ObjectId(id) })
+      : await db.collection('portfolio').find().toArray()
 
     return NextResponse.json({ message: 'Success', data }, { status: 200 })
   } catch (error: any) {
     console.error('Error processing request:', error)
-
     return NextResponse.json(
       { message: 'Fail', error: error.message },
       { status: 500 }

@@ -14,6 +14,7 @@ import { selectAfter, selectBefore } from '../shared/SelectAfterBefore'
 import { normFile } from '@/utils/normFile'
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
+import { rgbaToHex } from '@/app/utils/rgbToHex'
 interface Props {
   onFinish: (values: any) => Promise<void>
   data?: PortfolioItem
@@ -23,15 +24,12 @@ interface Props {
 export default function PortfolioForm({ onFinish, data, buttons }: Props) {
   const [initData, setInitData] = useState({})
 
-  if (data) {
-    console.log(data.brandColor)
-  }
-
   useEffect(() => {
     if (!data) return
+
     setInitData(() => ({
       ...data,
-      period: [dayjs(data.period[0]), dayjs(data.period[1])]
+      period: data.period && [dayjs(data.period[0]), dayjs(data.period[1])]
     }))
   }, [])
 
@@ -50,7 +48,7 @@ export default function PortfolioForm({ onFinish, data, buttons }: Props) {
           <Form.Item
             label='제목'
             name='title'
-            rules={[{ required: true, message: '제목을 입력해 주세요' }]}
+            // rules={[{ required: true, message: '제목을 입력해 주세요' }]}
           >
             <Input placeholder='제목을 입력해 주세요' allowClear />
           </Form.Item>
@@ -58,7 +56,7 @@ export default function PortfolioForm({ onFinish, data, buttons }: Props) {
           <Form.Item
             label='카테고리'
             name='category'
-            rules={[{ required: true, message: '카테고리를 입력해 주세요' }]}
+            // rules={[{ required: true, message: '카테고리를 입력해 주세요' }]}
           >
             <Select placeholder='카테고리를 선택해 주세요'>
               <Select.Option value='web'>WEB</Select.Option>
@@ -71,7 +69,7 @@ export default function PortfolioForm({ onFinish, data, buttons }: Props) {
           <Form.Item
             label='작업 기간'
             name='period'
-            rules={[{ required: true, message: '날짜를 입력해 주세요' }]}
+            // rules={[{ required: true, message: '날짜를 입력해 주세요' }]}
           >
             <DatePicker.RangePicker placeholder={['시작일', '종료일']} />
           </Form.Item>
@@ -79,7 +77,7 @@ export default function PortfolioForm({ onFinish, data, buttons }: Props) {
           <Form.Item
             label='기여도'
             name='contribution'
-            rules={[{ required: true, message: '기여도를 입력해 주세요' }]}
+            // rules={[{ required: true, message: '기여도를 입력해 주세요' }]}
           >
             <Slider />
           </Form.Item>
@@ -87,9 +85,9 @@ export default function PortfolioForm({ onFinish, data, buttons }: Props) {
           <Form.Item
             label='브랜드 컬러'
             name='brandColor'
-            rules={[{ required: true, message: '브랜드 컬러를 입력해 주세요' }]}
+            // rules={[{ required: true, message: '브랜드 컬러를 입력해 주세요' }]}
           >
-            <ColorPicker showText />
+            <ColorPicker showText format='hex' defaultFormat='hex' />
           </Form.Item>
 
           <Form.Item label='주소' name='link'>
@@ -114,7 +112,7 @@ export default function PortfolioForm({ onFinish, data, buttons }: Props) {
             valuePropName='fileList'
             name='images'
             getValueFromEvent={normFile}
-            rules={[{ required: true, message: '이미지를 등록해 주세요' }]}
+            // rules={[{ required: true, message: '이미지를 등록해 주세요' }]}
           >
             <Upload action='/upload.do' listType='picture-card'>
               <button style={{ border: 0, background: 'none' }} type='button'>

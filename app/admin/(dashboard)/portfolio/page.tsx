@@ -25,7 +25,9 @@ export default function Page() {
 
   const fetchData = async () => {
     try {
-      const { data } = await fetch('/api/gallery/read').then(res => res.json())
+      const { data } = await fetch('/api/portfolio/read').then(res =>
+        res.json()
+      )
       setData(data)
     } catch (error) {
       console.error(error)

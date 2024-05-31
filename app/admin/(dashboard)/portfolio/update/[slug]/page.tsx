@@ -5,6 +5,7 @@ import CommonTitle from '@/app/admin/components/shared/CommonTitle'
 import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import FormButtons from '@/app/admin/components/shared/FormButtons'
+import { rgbaToHex } from '@/app/utils/rgbToHex'
 
 interface Props {
   params: {
@@ -18,7 +19,7 @@ export default function Page({ params: slug }: Props) {
   const [data, setData] = useState<PortfolioItem>()
 
   const fetchData = useCallback(async () => {
-    const { data } = await fetch(`/api/gallery/read?id=${id}`).then(res =>
+    const { data } = await fetch(`/api/portfolio/read?id=${id}`).then(res =>
       res.json()
     )
     setData(data)
@@ -26,9 +27,23 @@ export default function Page({ params: slug }: Props) {
 
   const handleFinish = async (values: any) => {
     try {
-      const response = await fetch('/api/gallery/create', {
+      console.log(typeof values.brandColor)
+
+      const response = await fetch('/api/portfolio/update', {
         method: 'POST',
-        body: JSON.stringify(values)
+        body: JSON.stringify({
+          ...values,
+          _id: id,
+          brandColor:
+            typeof values.brandColor === 'string'
+              ? values.brandColor
+              : rgbaToHex(
+                  values.brandColor.metaColor.r,
+                  values.brandColor.metaColor.g,
+                  values.brandColor.metaColor.b,
+                  values.brandColor.metaColor.a
+                )
+        })
       })
 
       if (response.ok) {
@@ -52,7 +67,7 @@ export default function Page({ params: slug }: Props) {
         onFinish={handleFinish}
         data={data}
         buttons={
-          <FormButtons text='글 수정하기' deleteApi='/api/gallery/delete/' />
+          <FormButtons text='글 수정하기' deleteApi='/api/portfolio/delete/' />
         }
       />
     </>
