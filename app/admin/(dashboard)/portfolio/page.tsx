@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Row, Typography } from 'antd'
+import { Empty, Row, Typography } from 'antd'
 import PortfolioCard from '../../components/shared/PortfolioCard'
 import CommonTitle from '../../components/shared/CommonTitle'
 import CardContainer from '../../components/shared/CardContainer'
@@ -21,7 +21,7 @@ interface GalleryItem {
 
 export default function Page() {
   const router = useRouter()
-  const [data, setData] = useState<GalleryItem[] | null>(null)
+  const [data, setData] = useState<GalleryItem[]>([])
 
   const fetchData = async () => {
     try {
@@ -38,17 +38,21 @@ export default function Page() {
     fetchData()
   }, [])
 
-  if (!data) return null
-
   return (
     <>
       <CommonTitle title='게시판' />
       <CardContainer hasTitle={false}>
-        <Row gutter={[15, 15]}>
-          {data.map(item => (
-            <PortfolioCard key={item._id} item={item} />
-          ))}
-        </Row>
+        {data.length > 0 ? (
+          <Row gutter={[15, 15]}>
+            {data.map(item => (
+              <PortfolioCard key={item._id} item={item} />
+            ))}
+          </Row>
+        ) : (
+          <div className='py-20'>
+            <Empty description={<>데이터가 없습니다.</>} />
+          </div>
+        )}
       </CardContainer>
 
       <FormButtons

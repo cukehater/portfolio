@@ -4,12 +4,10 @@ import type { PopconfirmProps } from 'antd'
 import { Button, message, Popconfirm as Confirm } from 'antd'
 
 const confirm: PopconfirmProps['onConfirm'] = e => {
-  console.log(e)
   message.success('Click on Yes')
 }
 
 const cancel: PopconfirmProps['onCancel'] = e => {
-  console.log(e)
   message.error('Click on No')
 }
 

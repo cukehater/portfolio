@@ -10,11 +10,10 @@ import {
   Upload
 } from 'antd'
 import CardContainer from '../shared/CardContainer'
-import { selectAfter, selectBefore } from '../shared/SelectAfterBefore'
+import { selectProtocol, selectTopLevel } from '../shared/SelectAfterBefore'
 import { normFile } from '@/utils/normFile'
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
-import { rgbaToHex } from '@/app/utils/rgbToHex'
 interface Props {
   onFinish: (values: any) => Promise<void>
   data?: PortfolioItem
@@ -90,10 +89,10 @@ export default function PortfolioForm({ onFinish, data, buttons }: Props) {
             <ColorPicker showText format='hex' defaultFormat='hex' />
           </Form.Item>
 
-          <Form.Item label='주소' name='link'>
+          <Form.Item label='주소' name='domainName'>
             <Input
-              addonBefore={selectBefore}
-              addonAfter={selectAfter}
+              addonBefore={selectProtocol}
+              addonAfter={selectTopLevel}
               placeholder='도메인을 입력해 주세요'
               allowClear
             />

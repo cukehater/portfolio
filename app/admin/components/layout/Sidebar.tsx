@@ -68,16 +68,26 @@ const items: MenuItem[] = [
   )
 ]
 
+const urlPaths = [
+  '/admin/fundamental/company',
+  '/admin/fundamental/website',
+  '/admin/account/create',
+  '/admin/account/list',
+  '/admin/portfolio'
+]
+
 export default function Sidebar() {
   const pathname = usePathname()
-  const [current, setCurrent] = useState('/admin/fundamental/company')
+  const [current, setCurrent] = useState<string | undefined>(
+    '/admin/fundamental/company'
+  )
 
   const handleClick: MenuProps['onClick'] = e => {
     setCurrent(e.key)
   }
 
   useEffect(() => {
-    setCurrent(pathname.replace('/write', ''))
+    setCurrent(urlPaths.find(path => pathname.includes(path)))
   }, [pathname])
 
   return (

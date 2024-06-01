@@ -4,8 +4,8 @@ import CardContainer from '@/app/admin/components/shared/CardContainer'
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
 import FormButtons from '@/app/admin/components/shared/FormButtons'
 import {
-  selectAfter,
-  selectBefore
+  selectProtocol,
+  selectTopLevel
 } from '@/app/admin/components/shared/SelectAfterBefore'
 import { normFile } from '@/utils/normFile'
 import { InfoCircleOutlined, PlusOutlined } from '@ant-design/icons'
@@ -24,8 +24,8 @@ export default function Page() {
             </Form.Item>
             <Form.Item label='도메인'>
               <Input
-                addonBefore={selectBefore}
-                addonAfter={selectAfter}
+                addonBefore={selectProtocol}
+                addonAfter={selectTopLevel}
                 placeholder='도메인을 입력해 주세요'
               />
             </Form.Item>

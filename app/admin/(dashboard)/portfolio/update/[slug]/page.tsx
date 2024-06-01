@@ -27,8 +27,6 @@ export default function Page({ params: slug }: Props) {
 
   const handleFinish = async (values: any) => {
     try {
-      console.log(typeof values.brandColor)
-
       const response = await fetch('/api/portfolio/update', {
         method: 'POST',
         body: JSON.stringify({
