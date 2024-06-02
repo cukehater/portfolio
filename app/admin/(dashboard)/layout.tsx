@@ -1,12 +1,12 @@
 'use client'
 
 import '@/app/globals.css'
-import { ConfigProvider, FloatButton, Layout } from 'antd'
+import { ConfigProvider, FloatButton, Layout as AntdLayout } from 'antd'
 import Sidebar from '../components/layout/Sidebar'
 
-const { Content, Footer } = Layout
-
-export default function layout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function Layout({
+  children
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <ConfigProvider
       theme={{
@@ -31,14 +31,18 @@ export default function layout({ children }: Readonly<{ children: React.ReactNod
         }
       }}
     >
-      <Layout className='!min-h-screen'>
+      <AntdLayout className='!min-h-screen'>
         <Sidebar />
-        <Layout className='ml-[250px]'>
-          <Content className='m-4 ml-4 pt-5'>{children}</Content>
-          <Footer className='text-center'>© 2024 Created by Kyoungsic Kim</Footer>
-        </Layout>
+        <AntdLayout className='ml-[250px]'>
+          <AntdLayout.Content className='m-4 ml-4 pt-5'>
+            {children}
+          </AntdLayout.Content>
+          <AntdLayout.Footer className='text-center'>
+            © 2024 Created by Kyoungsic Kim
+          </AntdLayout.Footer>
+        </AntdLayout>
         <FloatButton.BackTop />
-      </Layout>
+      </AntdLayout>
     </ConfigProvider>
   )
 }

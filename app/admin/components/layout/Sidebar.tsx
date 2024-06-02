@@ -127,7 +127,7 @@ export default function Sidebar() {
         mode='inline'
         defaultSelectedKeys={['/admin/fundamental']}
         defaultOpenKeys={['/admin/fundamental']}
-        selectedKeys={[current]}
+        selectedKeys={[current ? current : '']}
         onClick={handleClick}
       />
     </Layout.Sider>

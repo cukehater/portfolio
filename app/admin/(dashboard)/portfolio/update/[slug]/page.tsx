@@ -33,7 +33,8 @@ export default function Page({ params: slug }: Props) {
           ...values,
           _id: id,
           brandColor:
-            typeof values.brandColor === 'string'
+            typeof values.brandColor === 'string' ||
+            typeof values.brandColor === 'undefined'
               ? values.brandColor
               : rgbaToHex(
                   values.brandColor.metaColor.r,

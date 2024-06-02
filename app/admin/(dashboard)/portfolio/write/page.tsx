@@ -6,16 +6,18 @@ import PortfolioForm from '@/app/admin/components/shared/PortfolioForm'
 import { rgbaToHex } from '@/app/utils/rgbToHex'
 import { useRouter } from 'next/navigation'
 
-export default function FormDisabledDemo() {
+export default function Page() {
   const router = useRouter()
   const handleFinish = async (values: any) => {
     try {
+      console.log('values.brandColor', values.brandColor)
       const response = await fetch('/api/portfolio/create', {
         method: 'POST',
         body: JSON.stringify({
           ...values,
           brandColor:
-            typeof values.brandColor === 'string'
+            typeof values.brandColor === 'string' ||
+            typeof values.brandColor === 'undefined'
               ? values.brandColor
               : rgbaToHex(
                   values.brandColor.metaColor.r,
