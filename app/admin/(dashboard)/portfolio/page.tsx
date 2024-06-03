@@ -50,7 +50,7 @@ export default function Page() {
           </Row>
         ) : (
           <div className='py-20'>
-            <Empty description={<>데이터가 없습니다.</>} />
+            <Empty description={<>데이터가 없습니다</>} />
           </div>
         )}
       </CardContainer>

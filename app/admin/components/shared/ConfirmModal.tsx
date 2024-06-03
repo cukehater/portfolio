@@ -1,33 +1,29 @@
 'use client'
 
 import type { PopconfirmProps } from 'antd'
-import { Button, message, Popconfirm as Confirm } from 'antd'
-
-const confirm: PopconfirmProps['onConfirm'] = e => {
-  message.success('Click on Yes')
-}
-
-const cancel: PopconfirmProps['onCancel'] = e => {
-  message.error('Click on No')
-}
+import { Button, Popconfirm as Confirm } from 'antd'
 
 export default function ConfirmModal({
   title,
   description,
   okText,
-  cancelText
+  cancelText,
+  onConfirm,
+  onCancel
 }: {
   title: string
   description: string
   okText: string
   cancelText: string
+  onConfirm: PopconfirmProps['onConfirm']
+  onCancel?: PopconfirmProps['onCancel']
 }) {
   return (
     <Confirm
       title={title}
       description={description}
-      onConfirm={confirm}
-      onCancel={cancel}
+      onConfirm={onConfirm}
+      onCancel={onCancel}
       okText={okText}
       cancelText={cancelText}
     >

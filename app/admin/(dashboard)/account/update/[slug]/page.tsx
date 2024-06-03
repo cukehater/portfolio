@@ -3,31 +3,27 @@
 import CardContainer from '@/app/admin/components/shared/CardContainer'
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
 import FormButtons from '@/app/admin/components/shared/FormButtons'
-import { Input, Form, message } from 'antd'
-import { useRouter } from 'next/navigation'
+import { accountItem } from '@/app/admin/types/admin'
+import { Input, Form } from 'antd'
+import { useParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 export default function Page() {
-  const router = useRouter()
+  const { slug } = useParams()
+  const [data, setData] = useState<accountItem>()
 
-  const handleFinish = async (values: any) => {
-    const result = await fetch('/api/admin/create', {
-      method: 'POST',
-      body: JSON.stringify({
-        userId: values.userId,
-        userPassword: values.userPassword
-      })
-    }).then(res => res.json())
-
-    if (result.hasLimit) {
-      return message.error('계정은 최대 5개까지 생성 가능합니다')
-    }
-
-    if (result.isDuplicated) {
-      return message.error('이미 사용 중인 아이디 입니다.')
-    }
-
-    return router.push('/admin/account/list')
+  const fetchData = async () => {
+    const { data } = await fetch(`/api/admin/read?id=${slug}`).then(res =>
+      res.json()
+    )
+    setData(data[0])
   }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  if (!data) return null
 
   return (
     <>
@@ -37,9 +33,9 @@ export default function Page() {
         labelCol={{ span: 6 }}
         wrapperCol={{ span: 18 }}
         labelAlign='left'
-        onFinish={handleFinish}
+        initialValues={data}
       >
-        <CardContainer title='⚙️ 관리자 계정 생성'>
+        <CardContainer title='⚙️ 관리자 계정 수정'>
           <div className='max-w-[600px]'>
             <Form.Item
               label='아이디'
@@ -55,7 +51,20 @@ export default function Page() {
             </Form.Item>
 
             <Form.Item
-              label='비밀번호'
+              label='현재 비밀번호'
+              name='currentPassword'
+              rules={[
+                {
+                  required: true,
+                  message: ''
+                }
+              ]}
+            >
+              <Input.Password placeholder='현재 비밀번호를 입력해 주세요' />
+            </Form.Item>
+
+            <Form.Item
+              label='새 비밀번호'
               name='userPassword'
               rules={[
                 {
@@ -64,7 +73,7 @@ export default function Page() {
                 }
               ]}
             >
-              <Input.Password placeholder='비밀번호를 입력해 주세요' />
+              <Input.Password placeholder='새 비밀번호를 입력해 주세요' />
             </Form.Item>
 
             <Form.Item
@@ -92,7 +101,7 @@ export default function Page() {
             </Form.Item>
           </div>
         </CardContainer>
-        <FormButtons text='생성하기' />
+        <FormButtons text='수정하기' />
       </Form>
     </>
   )

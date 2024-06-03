@@ -10,7 +10,6 @@ export default function Page() {
   const router = useRouter()
   const handleFinish = async (values: any) => {
     try {
-      console.log('values.brandColor', values.brandColor)
       const response = await fetch('/api/portfolio/create', {
         method: 'POST',
         body: JSON.stringify({
