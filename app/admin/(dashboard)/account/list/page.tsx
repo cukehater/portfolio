@@ -64,7 +64,10 @@ export default function Page() {
     <>
       <CommonTitle title='관리자 설정' />
 
-      <CardContainer title='⚙️ 관리자 계정 관리'>
+      <CardContainer
+        title='⚙️ 관리자 계정 관리'
+        subTitle='관리자 계정은 최대 5개까지 생성 가능합니다. '
+      >
         <Table columns={columns} dataSource={data} pagination={false} />
       </CardContainer>
     </>

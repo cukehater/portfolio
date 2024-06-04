@@ -1,9 +1,10 @@
 import { connectDB } from '@/utils/db'
 import { NextRequest, NextResponse } from 'next/server'
+import bcrypt from 'bcrypt'
 
 export async function POST(req: NextRequest) {
   try {
-    const data = await req.json()
+    const body = await req.json()
     const db = (await connectDB).db('portfolio')
     const count = await db.collection('admin').count()
 
@@ -16,11 +17,16 @@ export async function POST(req: NextRequest) {
     }
 
     // 아이디가 중복될 때
-    if (await db.collection('admin').findOne({ userId: data.userId })) {
+    if (await db.collection('admin').findOne({ userId: body.userId })) {
       return NextResponse.json(
         { message: 'Fail', isDuplicated: true },
         { status: 200 }
       )
+    }
+
+    const data = {
+      ...body,
+      userPassword: await bcrypt.hash(body.userPassword, 10)
     }
 
     await db.collection('admin').insertOne(data)

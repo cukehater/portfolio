@@ -11,11 +11,11 @@
   "dependencies": {
     "@ant-design/icons": "^5.3.7",
     "@ant-design/nextjs-registry": "^1.0.0",
+    "@types/bcrypt": "^5.0.2",
     "@types/nodemailer": "^6.4.15",
     "@types/uuid": "^9.0.8",
     "antd": "^5.17.3",
     "aws-sdk": "^2.1623.0",
-    "bcrypt": "^5.1.1",
     "dayjs": "^1.11.11",
     "mongodb": "^6.6.2",
     "next": "14.2.3",

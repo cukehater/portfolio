@@ -39,7 +39,10 @@ export default function Page() {
         labelAlign='left'
         onFinish={handleFinish}
       >
-        <CardContainer title='⚙️ 관리자 계정 생성'>
+        <CardContainer
+          title='⚙️ 관리자 계정 생성'
+          subTitle='관리자 계정은 최대 5개까지 생성 가능합니다. '
+        >
           <div className='max-w-[600px]'>
             <Form.Item
               label='아이디'
