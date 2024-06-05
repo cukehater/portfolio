@@ -17,6 +17,7 @@ export async function POST(req: NextRequest) {
     }
 
     // 아이디가 중복될 때
+    console.log('body.userId', body.userId)
     if (await db.collection('admin').findOne({ userId: body.userId })) {
       return NextResponse.json(
         { message: 'Fail', isDuplicated: true },
