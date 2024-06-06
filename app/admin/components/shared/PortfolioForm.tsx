@@ -1,11 +1,20 @@
 'use client'
 
-import { ColorPicker, DatePicker, Form, Input, Select, Slider } from 'antd'
+import {
+  ColorPicker,
+  DatePicker,
+  Form,
+  Input,
+  Select,
+  Slider,
+  Upload
+} from 'antd'
 import CardContainer from '../shared/CardContainer'
 import { selectProtocol, selectTopLevel } from '../shared/SelectAfterBefore'
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
-import UploadButton from './UploadButton'
+import { PlusOutlined } from '@ant-design/icons'
+import { uploadProps } from '@/utils/uploadProps'
 interface Props {
   onFinish: (values: any) => Promise<void>
   data?: PortfolioItem
@@ -105,7 +114,12 @@ export default function PortfolioForm({ onFinish, data, buttons }: Props) {
             // getValueFromEvent={normFile}
             // rules={[{ required: true, message: '이미지를 등록해 주세요' }]}
           >
-            <UploadButton />
+            <Upload listType='picture-card' {...uploadProps}>
+              <button style={{ border: 0, background: 'none' }} type='button'>
+                <PlusOutlined />
+                <div style={{ marginTop: 8 }}>Upload</div>
+              </button>
+            </Upload>
           </Form.Item>
         </div>
       </CardContainer>

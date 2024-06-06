@@ -5,7 +5,7 @@ import CommonTitle from '@/app/admin/components/shared/CommonTitle'
 import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import FormButtons from '@/app/admin/components/shared/FormButtons'
-import { rgbaToHex } from '@/app/utils/rgbToHex'
+import { rgbaToHex } from '@/utils/rgbToHex'
 
 interface Props {
   params: {

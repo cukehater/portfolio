@@ -3,7 +3,7 @@
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
 import FormButtons from '@/app/admin/components/shared/FormButtons'
 import PortfolioForm from '@/app/admin/components/shared/PortfolioForm'
-import { rgbaToHex } from '@/app/utils/rgbToHex'
+import { rgbaToHex } from '@/utils/rgbToHex'
 import { useRouter } from 'next/navigation'
 
 export default function Page() {
