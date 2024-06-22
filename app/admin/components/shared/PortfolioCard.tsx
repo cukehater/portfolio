@@ -1,50 +1,38 @@
-'use client'
-
 import { Card, Col, Skeleton } from 'antd'
+import CardMeta from 'antd/lib/card/Meta'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
-
-const { Meta } = Card
+import { PortfolioItem } from '../../types/portfolio'
 
 interface Props {
-  item: {
-    _id: string
-    title: string
-    imageUrl: string
-  }
+  item: PortfolioItem
 }
 
 export default function PortfolioCard({ item }: Props) {
-  const [loading, setLoading] = useState<boolean>(true)
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false)
-    }, 1000)
-
-    return () => {
-      clearTimeout(timer)
-    }
-  }, [])
-
   return (
-    <Col key={item._id} span={4}>
-      <Skeleton loading={loading} active>
-        <Link href={`/admin/portfolio/update/${item._id.toString()}`}>
+    <Col key={item._id.toString()} span={4}>
+      <Skeleton
+        // loading={loading}
+        loading={false}
+        active
+      >
+        <Link href={`/admin/portfolio/edit/${item._id.toString()}`}>
           <Card
             hoverable
             cover={
-              <Image
-                src={item.imageUrl}
-                alt={item.title}
-                width={300}
-                height={200}
-              />
+              item.imageUrl && (
+                <Image
+                  src={item.imageUrl}
+                  alt={item.title}
+                  width={300}
+                  height={200}
+                />
+              )
             }
             className='rounded-lg'
             bodyStyle={{ padding: '16px' }}
           >
-            <Meta title={item.title} />
+            <CardMeta title={item.title} />
           </Card>
         </Link>
       </Skeleton>

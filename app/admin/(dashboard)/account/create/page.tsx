@@ -2,32 +2,32 @@
 
 import CardContainer from '@/app/admin/components/shared/CardContainer'
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
-import FormButtons from '@/app/admin/components/shared/FormButtons'
-import { Input, Form, message } from 'antd'
-import { useRouter } from 'next/navigation'
+import FormButton from '@/app/admin/components/shared/FormButton'
+import { Input, Form } from 'antd'
+// import { useRouter } from 'next/navigation'
 
 export default function Page() {
-  const router = useRouter()
+  // const router = useRouter()
 
-  const handleFinish = async (values: any) => {
-    const result = await fetch('/api/admin/create', {
-      method: 'POST',
-      body: JSON.stringify({
-        userId: values.userId,
-        userPassword: values.userPassword
-      })
-    }).then(res => res.json())
+  // const handleFinish = async (values: any) => {
+  //   const result = await fetch('/api/admin/create', {
+  //     method: 'POST',
+  //     body: JSON.stringify({
+  //       userId: values.userId,
+  //       userPassword: values.userPassword
+  //     })
+  //   }).then(res => res.json())
 
-    if (result.hasLimit) {
-      return message.error('계정은 최대 5개까지 생성 가능합니다')
-    }
+  //   if (result.hasLimit) {
+  //     return message.error('계정은 최대 5개까지 생성 가능합니다')
+  //   }
 
-    if (result.isDuplicated) {
-      return message.error('이미 사용 중인 아이디 입니다.')
-    }
+  //   if (result.isDuplicated) {
+  //     return message.error('이미 사용 중인 아이디 입니다.')
+  //   }
 
-    return router.push('/admin/account/list')
-  }
+  //   return router.push('/admin/account/list')
+  // }
 
   return (
     <>
@@ -37,7 +37,7 @@ export default function Page() {
         labelCol={{ span: 6 }}
         wrapperCol={{ span: 18 }}
         labelAlign='left'
-        onFinish={handleFinish}
+        // onFinish={handleFinish}
       >
         <CardContainer
           title='⚙️ 관리자 계정 생성'
@@ -95,7 +95,7 @@ export default function Page() {
             </Form.Item>
           </div>
         </CardContainer>
-        <FormButtons text='생성하기' />
+        <FormButton text='생성하기' isSubmit />
       </Form>
     </>
   )

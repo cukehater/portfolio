@@ -2,7 +2,7 @@
 
 import CardContainer from '@/app/admin/components/shared/CardContainer'
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
-import FormButtons from '@/app/admin/components/shared/FormButtons'
+import FormButton from '@/app/admin/components/shared/FormButton'
 import {
   selectProtocol,
   selectTopLevel
@@ -92,7 +92,7 @@ export default function Page() {
           </div>
         </CardContainer>
 
-        <FormButtons text='저장하기' />
+        <FormButton text='저장하기' />
       </Form>
     </>
   )

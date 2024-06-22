@@ -1,47 +1,66 @@
 'use client'
 
-import {
-  ColorPicker,
-  DatePicker,
-  Form,
-  Input,
-  Select,
-  Slider,
-  Upload
-} from 'antd'
+import { DatePicker, Form, Input, Select, Slider, Upload, message } from 'antd'
 import CardContainer from '../shared/CardContainer'
 import { selectProtocol, selectTopLevel } from '../shared/SelectAfterBefore'
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import { PlusOutlined } from '@ant-design/icons'
 import { uploadProps } from '@/utils/uploadProps'
+import { PortfolioItem } from '../../types/portfolio'
+import { useParams, useRouter } from 'next/navigation'
+import axios from 'axios'
 interface Props {
-  onFinish: (values: any) => Promise<void>
-  data?: PortfolioItem
-  buttons: React.ReactNode
+  initData?: PortfolioItem
+  button: React.ReactNode
 }
 
-export default function PortfolioForm({ onFinish, data, buttons }: Props) {
-  const [initData, setInitData] = useState({})
+export default function PortfolioForm({ initData, button }: Props) {
+  const { slug } = useParams()
+  const router = useRouter()
+  const [initValues, setInitValues] = useState({})
+
+  const handleFinish = async (values: any) => {
+    try {
+      const apiUrl = initData
+        ? `/api/portfolio/update?_id=${slug}`
+        : '/api/portfolio/create'
+
+      const res = await axios.post(apiUrl, {
+        body: values
+      })
+      console.log('res', res)
+
+      if (res.status === 200) {
+        message.success(`${initData ? '수정' : '등록'}이 완료되었습니다.`)
+        return router.push('/admin/portfolio')
+      }
+    } catch (error) {
+      console.error('Error creating portfolio item:', error)
+    }
+  }
 
   useEffect(() => {
-    if (!data) return
+    if (!initData) return
 
-    setInitData(() => ({
-      ...data,
-      period: data.period && [dayjs(data.period[0]), dayjs(data.period[1])]
+    setInitValues(() => ({
+      ...initData,
+      period: initData.period && [
+        dayjs(initData.period[0]),
+        dayjs(initData.period[1])
+      ]
     }))
   }, [])
 
-  if (data && Object.keys(initData).length === 0) return null
+  if (initData && Object.keys(initValues).length === 0) return null
 
   return (
     <Form
-      onFinish={onFinish}
+      onFinish={handleFinish}
       labelCol={{ span: 6 }}
       wrapperCol={{ span: 18 }}
       labelAlign='left'
-      initialValues={initData}
+      initialValues={initValues}
     >
       <CardContainer title='⚙️ 게시판 글 작성'>
         <div className='max-w-[600px]'>
@@ -82,14 +101,6 @@ export default function PortfolioForm({ onFinish, data, buttons }: Props) {
             <Slider />
           </Form.Item>
 
-          <Form.Item
-            label='브랜드 컬러'
-            name='brandColor'
-            // rules={[{ required: true, message: '브랜드 컬러를 입력해 주세요' }]}
-          >
-            <ColorPicker showText format='hex' defaultFormat='hex' />
-          </Form.Item>
-
           <Form.Item label='주소' name='domainName'>
             <Input
               addonBefore={selectProtocol}
@@ -124,7 +135,7 @@ export default function PortfolioForm({ onFinish, data, buttons }: Props) {
         </div>
       </CardContainer>
 
-      {buttons}
+      {button}
     </Form>
   )
 }

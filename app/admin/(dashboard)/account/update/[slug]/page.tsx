@@ -2,7 +2,7 @@
 
 import CardContainer from '@/app/admin/components/shared/CardContainer'
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
-import FormButtons from '@/app/admin/components/shared/FormButtons'
+import FormButton from '@/app/admin/components/shared/FormButton'
 import { accountItem } from '@/app/admin/types/admin'
 import { Input, Form } from 'antd'
 import { useParams } from 'next/navigation'
@@ -101,7 +101,7 @@ export default function Page() {
             </Form.Item>
           </div>
         </CardContainer>
-        <FormButtons text='수정하기' />
+        <FormButton text='수정하기' />
       </Form>
     </>
   )
