@@ -3,7 +3,7 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["react-app", "react-app/jest"],
+  "extends": ["next/core-web-vitals"],
   "plugins": ["react"],
   "settings": {
     "import/resolver": {}
@@ -47,6 +47,14 @@
           "caseInsensitive": true
         },
         "newlines-between": "always"
+      }
+    ],
+    "no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "args": "after-used",
+        "ignoreRestSiblings": false
       }
     ]
   }

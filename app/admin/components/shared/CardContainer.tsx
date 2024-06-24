@@ -1,4 +1,5 @@
-import { Card, Typography } from 'antd'
+import { Card } from 'antd'
+import TypographyTitle from 'antd/lib/typography/title'
 import { PropsWithChildren } from 'react'
 
 export default function CardContainer({
@@ -16,16 +17,16 @@ export default function CardContainer({
       title={
         hasTitle && (
           <div className='py-4'>
-            <Typography.Title level={4} className='mb-0'>
+            <TypographyTitle level={4} className='mb-0'>
               {title}
-            </Typography.Title>
+            </TypographyTitle>
             {subTitle && (
-              <Typography.Title
+              <TypographyTitle
                 level={5}
                 className='mb-0 mt-2 text-gray-500 font-normal text-sm'
               >
                 {subTitle}
-              </Typography.Title>
+              </TypographyTitle>
             )}
           </div>
         )

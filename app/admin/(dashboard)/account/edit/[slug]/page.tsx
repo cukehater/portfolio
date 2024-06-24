@@ -1,27 +1,29 @@
 'use client'
 
+import { useCallback, useEffect, useState } from 'react'
+
+import { Input, Form } from 'antd'
+import { useParams } from 'next/navigation'
+
 import CardContainer from '@/app/admin/components/shared/CardContainer'
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
 import FormButton from '@/app/admin/components/shared/FormButton'
-import { accountItem } from '@/app/admin/types/admin'
-import { Input, Form } from 'antd'
-import { useParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { AccountItem } from '@/app/admin/types/admin'
 
 export default function Page() {
   const { slug } = useParams()
-  const [data, setData] = useState<accountItem>()
+  const [data, setData] = useState<AccountItem>()
 
-  const fetchData = async () => {
-    const { data } = await fetch(`/api/admin/read?id=${slug}`).then(res =>
+  const fetchData = useCallback(async () => {
+    const { data } = await fetch(`/api/account/read?id=${slug}`).then(res =>
       res.json()
     )
     setData(data[0])
-  }
+  }, [slug])
 
   useEffect(() => {
     fetchData()
-  }, [])
+  }, [fetchData])
 
   if (!data) return null
 

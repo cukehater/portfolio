@@ -2,6 +2,7 @@ import { Card, Col, Skeleton } from 'antd'
 import CardMeta from 'antd/lib/card/Meta'
 import Image from 'next/image'
 import Link from 'next/link'
+
 import { PortfolioItem } from '../../types/portfolio'
 
 interface Props {

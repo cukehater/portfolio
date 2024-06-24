@@ -1,15 +1,19 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+
+import { PlusOutlined } from '@ant-design/icons'
 import { DatePicker, Form, Input, Select, Slider, Upload, message } from 'antd'
+import axios from 'axios'
+import dayjs from 'dayjs'
+import { useParams, useRouter } from 'next/navigation'
+
+import { uploadProps } from '@/utils/uploadProps'
+
+import { PortfolioItem } from '../../types/portfolio'
 import CardContainer from '../shared/CardContainer'
 import { selectProtocol, selectTopLevel } from '../shared/SelectAfterBefore'
-import { useEffect, useState } from 'react'
-import dayjs from 'dayjs'
-import { PlusOutlined } from '@ant-design/icons'
-import { uploadProps } from '@/utils/uploadProps'
-import { PortfolioItem } from '../../types/portfolio'
-import { useParams, useRouter } from 'next/navigation'
-import axios from 'axios'
+
 interface Props {
   initData?: PortfolioItem
   button: React.ReactNode
@@ -50,7 +54,7 @@ export default function PortfolioForm({ initData, button }: Props) {
         dayjs(initData.period[1])
       ]
     }))
-  }, [])
+  }, [initData])
 
   if (initData && Object.keys(initValues).length === 0) return null
 

@@ -1,5 +1,6 @@
 import TypographyTitle from 'antd/lib/typography/title'
 import Image from 'next/image'
+
 import Logo from '@/public/next.svg'
 
 export default function CommonTitle({ title }: { title: string }) {

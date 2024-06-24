@@ -4,7 +4,6 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Popconfirm, message } from 'antd'
 import axios from 'axios'
 import { useParams, useRouter } from 'next/navigation'
-import { useState } from 'react'
 
 interface Props {
   text: string

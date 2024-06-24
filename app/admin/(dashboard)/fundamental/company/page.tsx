@@ -1,11 +1,12 @@
 'use client'
 
+import { UploadOutlined } from '@ant-design/icons'
+import { Button, Form, Input, Upload, UploadProps, message } from 'antd'
+
 import CardContainer from '@/app/admin/components/shared/CardContainer'
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
 import FormButton from '@/app/admin/components/shared/FormButton'
 import { normFile } from '@/utils/normFile'
-import { UploadOutlined } from '@ant-design/icons'
-import { Button, Form, Input, Upload, UploadProps, message } from 'antd'
 
 export default function Page() {
   const props: UploadProps = {

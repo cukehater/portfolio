@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
   if (!id) return
 
   const db = (await connectDB).db('portfolio')
-  await db.collection('admin').deleteOne({ _id: new ObjectId(id) })
+  await db.collection('account').deleteOne({ _id: new ObjectId(id) })
 
   return NextResponse.json({ message: 'Success' }, { status: 200 })
 }
