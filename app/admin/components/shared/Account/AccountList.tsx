@@ -4,7 +4,7 @@ import { Button, Flex, Table, TableProps, message } from 'antd'
 import axios from 'axios'
 import Link from 'next/link'
 
-import { AccountItem } from '@/app/admin/types/admin'
+import { AccountItem } from '@/app/admin/types/account'
 
 import ConfirmModal from '../ConfirmModal'
 
@@ -26,9 +26,9 @@ const columns: TableProps<AccountItem>['columns'] = [
     align: 'center',
     render: item => (
       <Flex gap='small' justify='center'>
-        <Button>
-          <Link href={`/admin/account/edit/${item._id}`}>수정</Link>
-        </Button>
+        <Link href={`/admin/account/edit/${item._id}`}>
+          <Button>수정</Button>
+        </Link>
         <ConfirmModal
           title='해당 계정을 삭제하시겠습니까?'
           description=''

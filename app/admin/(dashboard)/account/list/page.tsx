@@ -1,7 +1,7 @@
 import AccountList from '@/app/admin/components/shared/Account/AccountList'
 import CardContainer from '@/app/admin/components/shared/CardContainer'
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
-import { AccountItem } from '@/app/admin/types/admin'
+import { AccountItem } from '@/app/admin/types/account'
 import { connectDB } from '@/utils/db'
 
 export default async function Page() {

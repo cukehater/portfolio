@@ -1,110 +1,31 @@
-'use client'
+import { ObjectId } from 'mongodb'
 
-import { useCallback, useEffect, useState } from 'react'
-
-import { Input, Form } from 'antd'
-import { useParams } from 'next/navigation'
-
-import CardContainer from '@/app/admin/components/shared/CardContainer'
+import AccountForm from '@/app/admin/components/shared/Account/AccountForm'
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
-import FormButton from '@/app/admin/components/shared/FormButton'
-import { AccountItem } from '@/app/admin/types/admin'
+import { connectDB } from '@/utils/db'
 
-export default function Page() {
-  const { slug } = useParams()
-  const [data, setData] = useState<AccountItem>()
+interface Props {
+  params: { slug: string }
+}
 
-  const fetchData = useCallback(async () => {
-    const { data } = await fetch(`/api/account/read?id=${slug}`).then(res =>
-      res.json()
-    )
-    setData(data[0])
-  }, [slug])
+export default async function Page({ params: { slug } }: Props) {
+  const db = (await connectDB).db('portfolio')
+  const initData = await db
+    .collection('account')
+    .findOne({ _id: new ObjectId(slug) })
+    .then(res => {
+      if (res) {
+        return { _id: res?._id, userId: res?.userId }
+      }
+      return null
+    })
 
-  useEffect(() => {
-    fetchData()
-  }, [fetchData])
-
-  if (!data) return null
+  if (!initData) return null
 
   return (
     <>
       <CommonTitle title='관리자 설정' />
-
-      <Form
-        labelCol={{ span: 6 }}
-        wrapperCol={{ span: 18 }}
-        labelAlign='left'
-        initialValues={data}
-      >
-        <CardContainer title='⚙️ 관리자 계정 수정'>
-          <div className='max-w-[600px]'>
-            <Form.Item
-              label='아이디'
-              name='userId'
-              rules={[
-                {
-                  required: true,
-                  message: '아이디를 입력해 주세요'
-                }
-              ]}
-            >
-              <Input placeholder='아이디를 입력해 주세요' allowClear />
-            </Form.Item>
-
-            <Form.Item
-              label='현재 비밀번호'
-              name='currentPassword'
-              rules={[
-                {
-                  required: true,
-                  message: ''
-                }
-              ]}
-            >
-              <Input.Password placeholder='현재 비밀번호를 입력해 주세요' />
-            </Form.Item>
-
-            <Form.Item
-              label='새 비밀번호'
-              name='userPassword'
-              rules={[
-                {
-                  required: true,
-                  message: ''
-                }
-              ]}
-            >
-              <Input.Password placeholder='새 비밀번호를 입력해 주세요' />
-            </Form.Item>
-
-            <Form.Item
-              label='비밀번호 확인'
-              name='confirmPassword'
-              dependencies={['password']}
-              rules={[
-                {
-                  required: true,
-                  message: ''
-                },
-                ({ getFieldValue }) => ({
-                  validator(_, value) {
-                    if (!value || getFieldValue('userPassword') === value) {
-                      return Promise.resolve()
-                    }
-                    return Promise.reject(
-                      new Error('비밀번호가 일치하지 않습니다')
-                    )
-                  }
-                })
-              ]}
-            >
-              <Input.Password placeholder='비밀번호를 입력해 주세요' />
-            </Form.Item>
-          </div>
-        </CardContainer>
-        <FormButton text='수정하기' />
-      </Form>
+      <AccountForm initData={initData} />
     </>
   )
 }

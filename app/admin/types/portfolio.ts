@@ -6,6 +6,5 @@ export interface PortfolioItem {
   category: string
   period: string[]
   contribution: number
-  brandColor: any
   imageUrl: string
 }

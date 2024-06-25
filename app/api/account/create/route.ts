@@ -1,6 +1,7 @@
-import { connectDB } from '@/utils/db'
-import { NextRequest, NextResponse } from 'next/server'
 import bcrypt from 'bcrypt'
+import { NextRequest, NextResponse } from 'next/server'
+
+import { connectDB } from '@/utils/db'
 
 export async function POST(req: NextRequest) {
   try {

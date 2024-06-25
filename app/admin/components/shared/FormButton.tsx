@@ -49,10 +49,9 @@ export default function FormButton({
             type='primary'
             htmlType='button'
             className='flex items-center'
-            shape='round'
             danger
           >
-            <DeleteOutlined /> {text}
+            {text}
           </Button>
         </Popconfirm>
       ) : (
@@ -60,13 +59,12 @@ export default function FormButton({
           type='primary'
           htmlType={isSubmit ? 'submit' : 'button'}
           className='flex items-center'
-          shape='round'
           onClick={() => {
             if (isSubmit) return
             handleRouterPush()
           }}
         >
-          <EditOutlined /> {text}
+          {text}
         </Button>
       )}
     </div>

@@ -4,13 +4,20 @@ import { Form, Input, message } from 'antd'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 
+import { AccountItem } from '@/app/admin/types/account'
+
 import CardContainer from '../CardContainer'
 import FormButton from '../FormButton'
 
-export default function CreateForm() {
+interface Props {
+  initData?: AccountItem
+}
+
+export default function AccountForm({ initData }: Props) {
   const router = useRouter()
 
-  const handleFinish = async (values: any) => {
+  // 계정 생성
+  const handleCreate = async (values: AccountItem) => {
     try {
       await axios.post('/api/account/create', {
         body: { userId: values.userId, userPassword: values.userPassword }
@@ -29,16 +36,41 @@ export default function CreateForm() {
     }
   }
 
+  // 계정 수정
+  const handleUpdate = async (values: AccountItem) => {
+    if (!initData) return
+
+    try {
+      await axios.post('/api/account/update', {
+        body: {
+          _id: initData._id,
+          userId: values.userId,
+          userPassword: values.userPassword
+        }
+      })
+
+      message.success('계정 정보가 성공적으로 수정되었습니다.')
+      return router.push('/admin/account/list')
+    } catch (error: any) {
+      console.error(error)
+    }
+  }
+
   return (
     <Form
       labelCol={{ span: 6 }}
       wrapperCol={{ span: 18 }}
       labelAlign='left'
-      onFinish={handleFinish}
+      onFinish={item => {
+        initData ? handleUpdate(item) : handleCreate(item)
+      }}
+      initialValues={initData}
     >
       <CardContainer
-        title='⚙️ 관리자 계정 생성'
-        subTitle='관리자 계정은 최대 5개까지 생성 가능합니다. '
+        title={`⚙️ 관리자 계정 ${initData ? '수정 ' : '생성'}`}
+        subTitle={
+          initData ? '' : '관리자 계정은 최대 5개까지 생성 가능합니다. '
+        }
       >
         <div className='max-w-[600px]'>
           <Form.Item
@@ -51,7 +83,11 @@ export default function CreateForm() {
               }
             ]}
           >
-            <Input placeholder='아이디를 입력해 주세요' allowClear />
+            <Input
+              placeholder='아이디를 입력해 주세요'
+              allowClear
+              readOnly={Boolean(initData)}
+            />
           </Form.Item>
 
           <Form.Item
@@ -92,7 +128,7 @@ export default function CreateForm() {
           </Form.Item>
         </div>
       </CardContainer>
-      <FormButton text='생성하기' isSubmit />
+      <FormButton text={initData ? '수정하기' : '생성하기'} isSubmit />
     </Form>
   )
 }

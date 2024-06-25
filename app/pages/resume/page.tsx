@@ -1,16 +1,16 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import profile from '@/app/pages/resume/images/profile_img.jpg'
-import html from '@/app/pages/resume/images/html.svg'
 import css from '@/app/pages/resume/images/css.svg'
-import sass from '@/app/pages/resume/images/sass.svg'
+import git from '@/app/pages/resume/images/git.svg'
+import html from '@/app/pages/resume/images/html.svg'
 import javascript from '@/app/pages/resume/images/javascript.svg'
 import jquery from '@/app/pages/resume/images/jquery.svg'
-import react from '@/app/pages/resume/images/react.svg'
-import typescript from '@/app/pages/resume/images/typescript.svg'
 import nextjs from '@/app/pages/resume/images/next.svg'
-import git from '@/app/pages/resume/images/git.svg'
+import profile from '@/app/pages/resume/images/profile_img.jpg'
+import react from '@/app/pages/resume/images/react.svg'
+import sass from '@/app/pages/resume/images/sass.svg'
+import typescript from '@/app/pages/resume/images/typescript.svg'
 
 export default function Resume() {
   const info = {
