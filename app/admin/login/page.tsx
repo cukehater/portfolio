@@ -2,8 +2,9 @@
 
 import type { FormProps } from 'antd'
 import { Button, Checkbox, Form, Input } from 'antd'
-import Logo from '@/public/vercel.svg'
 import Image from 'next/image'
+
+import Logo from '@/public/vercel.svg'
 
 type FieldType = {
   username?: string

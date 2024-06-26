@@ -1,6 +1,7 @@
+import { PropsWithChildren } from 'react'
+
 import { Card } from 'antd'
 import TypographyTitle from 'antd/lib/typography/title'
-import { PropsWithChildren } from 'react'
 
 export default function CardContainer({
   hasTitle = true,
