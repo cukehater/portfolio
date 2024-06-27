@@ -6,7 +6,11 @@
   "extends": ["next/core-web-vitals"],
   "plugins": ["react"],
   "settings": {
-    "import/resolver": {}
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
   },
   "rules": {
     "import/order": [
@@ -24,17 +28,24 @@
             "position": "before"
           },
           {
-            "pattern": "{common/**,components,components/**,store/**}",
+            "pattern": "{next,next-*}",
+            "group": "builtin",
+            "position": "before"
+          },
+          {
+            "pattern": "{components/**,common/components/**}",
             "group": "internal",
             "position": "before"
           },
           {
-            "pattern": "{./components/**,**/config}",
-            "group": "internal"
+            "pattern": "{hooks/**,common/hooks/**}",
+            "group": "internal",
+            "position": "before"
           },
           {
             "pattern": "{styles,./*.css,../*.css,./*.module.css,../*.module.css}",
-            "group": "index"
+            "group": "index",
+            "position": "before"
           },
           {
             "pattern": "{assets/**/*.png,assets/*/*.jpg,assets/*/*.jpeg,assets/*/*.gif}",
