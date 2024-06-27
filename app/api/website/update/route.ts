@@ -5,6 +5,7 @@ import { connectDB } from '@/utils/db'
 
 export async function POST(req: NextRequest) {
   const { body } = await req.json()
+  console.log('body', body)
 
   try {
     const db = (await connectDB).db('portfolio')
@@ -12,11 +13,11 @@ export async function POST(req: NextRequest) {
       // 업데이트
       const { _id, ...data } = body
       await db
-        .collection('company')
+        .collection('website')
         .updateOne({ _id: new ObjectId(_id) }, { $set: data })
     } else {
       // 생성
-      await db.collection('company').insertOne(body)
+      await db.collection('website').insertOne(body)
     }
 
     return NextResponse.json(

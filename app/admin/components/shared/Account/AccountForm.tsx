@@ -51,7 +51,7 @@ export default function AccountForm({ initData }: Props) {
 
       message.success('계정 정보가 성공적으로 수정되었습니다.')
       return router.push('/admin/account/list')
-    } catch (error: any) {
+    } catch (error) {
       console.error(error)
     }
   }

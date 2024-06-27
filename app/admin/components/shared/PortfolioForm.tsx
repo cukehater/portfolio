@@ -24,7 +24,7 @@ export default function PortfolioForm({ initData, button }: Props) {
   const router = useRouter()
   const [initValues, setInitValues] = useState({})
 
-  const handleFinish = async (values: any) => {
+  const handleFinish = async (values: PortfolioItem) => {
     try {
       const apiUrl = initData
         ? `/api/portfolio/update?_id=${slug}`
@@ -33,7 +33,6 @@ export default function PortfolioForm({ initData, button }: Props) {
       const res = await axios.post(apiUrl, {
         body: values
       })
-      console.log('res', res)
 
       if (res.status === 200) {
         message.success(`${initData ? '수정' : '등록'}이 완료되었습니다.`)

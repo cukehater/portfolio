@@ -1,4 +1,4 @@
-import AccountForm from '@/app/admin/components/shared/Account/AccountForm'
+import AccountForm from '@/app/admin/components/shared/account/AccountForm'
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
 
 export default function Page() {

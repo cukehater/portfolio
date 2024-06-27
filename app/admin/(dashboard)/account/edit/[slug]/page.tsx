@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb'
 
-import AccountForm from '@/app/admin/components/shared/Account/AccountForm'
+import AccountForm from '@/app/admin/components/shared/account/AccountForm'
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
 import { connectDB } from '@/utils/db'
 

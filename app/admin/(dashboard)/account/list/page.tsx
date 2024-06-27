@@ -1,4 +1,4 @@
-import AccountList from '@/app/admin/components/shared/Account/AccountList'
+import AccountList from '@/app/admin/components/shared/account/AccountList'
 import CardContainer from '@/app/admin/components/shared/CardContainer'
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
 import { AccountItem } from '@/app/admin/types/account'

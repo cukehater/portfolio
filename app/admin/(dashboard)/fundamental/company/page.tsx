@@ -1,5 +1,5 @@
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
-import CompanyForm from '@/app/admin/components/shared/Company/CompanyForm'
+import CompanyForm from '@/app/admin/components/shared/company/CompanyForm'
 import { connectDB } from '@/utils/db'
 
 export default async function Page() {

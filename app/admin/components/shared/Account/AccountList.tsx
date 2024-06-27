@@ -49,5 +49,11 @@ const handleDelete = async (item: AccountItem) => {
 }
 
 export default function AccountList({ data }: Props) {
-  return <Table columns={columns} dataSource={data} pagination={false} />
+  return (
+    <Table
+      columns={columns}
+      dataSource={data.map(item => ({ ...item, key: item._id }))}
+      pagination={false}
+    />
+  )
 }

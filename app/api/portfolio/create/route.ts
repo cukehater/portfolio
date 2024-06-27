@@ -1,10 +1,11 @@
-import { connectDB } from '@/utils/db'
 import { NextRequest, NextResponse } from 'next/server'
+
+import { connectDB } from '@/utils/db'
 
 export async function POST(req: NextRequest) {
   try {
     const { body: data } = await req.json()
-    console.log('data', data)
+
     const db = (await connectDB).db('portfolio')
     await db.collection('portfolio').insertOne(data)
 
