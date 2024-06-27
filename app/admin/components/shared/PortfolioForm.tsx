@@ -35,7 +35,7 @@ export default function PortfolioForm({ initData, button }: Props) {
       })
 
       if (res.status === 200) {
-        message.success(`${initData ? '수정' : '등록'}이 완료되었습니다.`)
+        message.success(`${initData ? '수정' : '등록'}이 완료되었습니다`)
         return router.push('/admin/portfolio')
       }
     } catch (error) {

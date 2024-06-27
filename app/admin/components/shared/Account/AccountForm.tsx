@@ -23,7 +23,7 @@ export default function AccountForm({ initData }: Props) {
         body: { userId: values.userId, userPassword: values.userPassword }
       })
 
-      message.success('계정 생성이 완료되었습니다.')
+      message.success('계정 생성이 완료되었습니다')
       return router.push('/admin/account/list')
     } catch (error: any) {
       if (error.response.data.hasLimit) {
@@ -31,7 +31,7 @@ export default function AccountForm({ initData }: Props) {
       }
 
       if (error.response.data.isDuplicated) {
-        return message.error('이미 사용 중인 아이디 입니다.')
+        return message.error('이미 사용 중인 아이디 입니다')
       }
     }
   }
@@ -49,7 +49,7 @@ export default function AccountForm({ initData }: Props) {
         }
       })
 
-      message.success('계정 정보가 성공적으로 수정되었습니다.')
+      message.success('계정 정보가 성공적으로 수정되었습니다')
       return router.push('/admin/account/list')
     } catch (error) {
       console.error(error)
@@ -68,9 +68,7 @@ export default function AccountForm({ initData }: Props) {
     >
       <CardContainer
         title={`⚙️ 관리자 계정 ${initData ? '수정 ' : '생성'}`}
-        subTitle={
-          initData ? '' : '관리자 계정은 최대 5개까지 생성 가능합니다. '
-        }
+        subTitle={initData ? '' : '관리자 계정은 최대 5개까지 생성 가능합니다 '}
       >
         <div className='max-w-[600px]'>
           <Form.Item

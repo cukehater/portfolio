@@ -24,7 +24,7 @@ export default function WebsiteForm({ initData }: Props) {
     if (res.status === 200) {
       message.success('변경 사항이 성공적으로 저장되었습니다')
     } else {
-      message.error('저장을 실패했습니다. 잠시 후 다시 시도해 주세요')
+      message.error('저장을 실패했습니다')
     }
   }
 

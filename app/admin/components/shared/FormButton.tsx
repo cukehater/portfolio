@@ -30,7 +30,7 @@ export default function FormButton({
     const result = await axios.get(`${deleteApi}?id=${slug}`)
 
     if (result.status === 200) {
-      message.success('삭제가 완료되었습니다.')
+      message.success('삭제가 완료되었습니다')
       return router.push(redirectPath)
     }
   }

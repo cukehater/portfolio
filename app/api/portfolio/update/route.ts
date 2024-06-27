@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
 
     if (!_id) {
       return NextResponse.json(
-        { message: 'Fail', error: '_id 파라미터를 찾을 수 없습니다.' },
+        { message: 'Fail', error: '_id 파라미터를 찾을 수 없습니다' },
         { status: 400 }
       )
     }
