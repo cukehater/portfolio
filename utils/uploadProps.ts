@@ -27,8 +27,8 @@ export const uploadProps = {
   }: any) {
     // AWS SDK 설정
     aws.config.update({
-      accessKeyId: process.env.S3_ACCESS_KEY!,
-      secretAccessKey: process.env.S3_SECRET_KEY!,
+      accessKeyId: process.env.NEXT_S3_ACCESS_KEY!,
+      secretAccessKey: process.env.NEXT_S3_SECRET_KEY!,
       region: 'ap-northeast-2',
       signatureVersion: 'v4'
     })
@@ -40,7 +40,7 @@ export const uploadProps = {
     console.log('DEBUG file type', file.type)
 
     const objParams = {
-      Bucket: process.env.S3_BUCKET_NAME!,
+      Bucket: process.env.NEXT_S3_BUCKET_NAME!,
       Key: `email@gmail.com/${file.name}`,
       Body: file,
       ContentType: file.type // content-type 설정

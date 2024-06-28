@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 
-import { PlusOutlined } from '@ant-design/icons'
 import {
   ColorPicker,
   DatePicker,
@@ -10,7 +9,6 @@ import {
   Input,
   Select,
   Slider,
-  Upload,
   message
 } from 'antd'
 import axios from 'axios'
@@ -18,10 +16,10 @@ import dayjs from 'dayjs'
 import { useParams, useRouter } from 'next/navigation'
 
 import { PortfolioItem } from '@/app/admin/types/portfolio'
-import { uploadProps } from '@/utils/uploadProps'
+import { normFile } from '@/utils/normFile'
 
 import CardContainer from '../CardContainer'
-import { selectProtocol, selectTopLevel } from '../SelectAfterBefore'
+import FileUpload from '../FileUpload'
 
 interface Props {
   initData?: PortfolioItem
@@ -83,7 +81,7 @@ export default function PortfolioForm({ initData, button }: Props) {
           <Form.Item
             label='제목'
             name='title'
-            // rules={[{ required: true, message: '제목을 입력해 주세요' }]}
+            rules={[{ required: true, message: '제목을 입력해 주세요' }]}
           >
             <Input placeholder='제목을 입력해 주세요' allowClear />
           </Form.Item>
@@ -91,7 +89,7 @@ export default function PortfolioForm({ initData, button }: Props) {
           <Form.Item
             label='카테고리'
             name='category'
-            // rules={[{ required: true, message: '카테고리를 입력해 주세요' }]}
+            rules={[{ required: true, message: '카테고리를 입력해 주세요' }]}
           >
             <Select placeholder='카테고리를 선택해 주세요'>
               <Select.Option value='web'>WEB</Select.Option>
@@ -104,7 +102,7 @@ export default function PortfolioForm({ initData, button }: Props) {
           <Form.Item
             label='작업 기간'
             name='period'
-            // rules={[{ required: true, message: '날짜를 입력해 주세요' }]}
+            rules={[{ required: true, message: '날짜를 입력해 주세요' }]}
           >
             <DatePicker.RangePicker placeholder={['시작일', '종료일']} />
           </Form.Item>
@@ -112,7 +110,7 @@ export default function PortfolioForm({ initData, button }: Props) {
           <Form.Item
             name='brandColor'
             label='브랜드 컬러'
-            // rules={[{ required: true, message: '브랜드 컬러를 입력해 주세요' }]}
+            rules={[{ required: true, message: '브랜드 컬러를 입력해 주세요' }]}
           >
             <ColorPicker
               showText
@@ -124,15 +122,21 @@ export default function PortfolioForm({ initData, button }: Props) {
           <Form.Item
             label='기여도'
             name='contribution'
-            // rules={[{ required: true, message: '기여도를 입력해 주세요' }]}
+            rules={[{ required: true, message: '기여도를 입력해 주세요' }]}
           >
             <Slider />
           </Form.Item>
 
           <Form.Item label='주소' name='domainName'>
             <Input
-              addonBefore={selectProtocol}
-              addonAfter={selectTopLevel}
+              addonBefore={
+                <Form.Item name='protocol' noStyle>
+                  <Select defaultValue={'https://'}>
+                    <Select.Option value='http://'>http://</Select.Option>
+                    <Select.Option value='https://'>https://</Select.Option>
+                  </Select>
+                </Form.Item>
+              }
               placeholder='도메인을 입력해 주세요'
               allowClear
             />
@@ -148,17 +152,18 @@ export default function PortfolioForm({ initData, button }: Props) {
 
           <Form.Item
             label='이미지'
-            // valuePropName='fileList'
+            valuePropName='fileList'
             name='images'
-            // getValueFromEvent={normFile}
-            // rules={[{ required: true, message: '이미지를 등록해 주세요' }]}
+            getValueFromEvent={normFile}
+            rules={[{ required: true, message: '이미지를 등록해 주세요' }]}
           >
-            <Upload listType='picture-card' {...uploadProps}>
+            {/* <Upload listType='picture-card' {...uploadProps}>
               <button style={{ border: 0, background: 'none' }} type='button'>
                 <PlusOutlined />
                 <div style={{ marginTop: 8 }}>Upload</div>
               </button>
-            </Upload>
+            </Upload> */}
+            <FileUpload />
           </Form.Item>
         </div>
       </CardContainer>

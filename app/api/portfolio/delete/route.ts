@@ -1,6 +1,7 @@
-import { connectDB } from '@/utils/db'
 import { ObjectId } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'
+
+import { connectDB } from '@/utils/db'
 
 export async function GET(req: NextRequest) {
   const id = req.nextUrl.searchParams.get('id')

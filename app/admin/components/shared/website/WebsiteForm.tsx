@@ -1,7 +1,7 @@
 'use client'
 
 import { InfoCircleOutlined, PlusOutlined } from '@ant-design/icons'
-import { Form, Input, Switch, Tooltip, Upload, message } from 'antd'
+import { Form, Input, Select, Switch, Tooltip, Upload, message } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
 import axios from 'axios'
 
@@ -9,7 +9,6 @@ import { normFile } from '@/utils/normFile'
 
 import CardContainer from '../CardContainer'
 import FormButton from '../FormButton'
-import { selectProtocol, selectTopLevel } from '../SelectAfterBefore'
 
 interface Props {
   initData: any
@@ -43,8 +42,14 @@ export default function WebsiteForm({ initData }: Props) {
           </Form.Item>
           <Form.Item label='도메인' name='domain'>
             <Input
-              addonBefore={selectProtocol}
-              addonAfter={selectTopLevel}
+              addonBefore={
+                <Form.Item name='protocol' noStyle>
+                  <Select defaultValue={'https://'}>
+                    <Select.Option value='http://'>http://</Select.Option>
+                    <Select.Option value='https://'>https://</Select.Option>
+                  </Select>
+                </Form.Item>
+              }
               placeholder='도메인을 입력해 주세요'
             />
           </Form.Item>
