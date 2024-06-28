@@ -106,7 +106,7 @@ export default function CompanyForm({ initData }: Props) {
         </div>
       </CardContainer>
 
-      <FormButton text='저장하기' isSubmit />
+      <FormButton text='저장' isSubmit />
     </Form>
   )
 }

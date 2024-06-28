@@ -3,7 +3,7 @@ import { ObjectId } from 'mongodb'
 
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
 import FormButton from '@/app/admin/components/shared/FormButton'
-import PortfolioForm from '@/app/admin/components/shared/PortfolioForm'
+import PortfolioForm from '@/app/admin/components/shared/portfolio/PortfolioForm'
 import { PortfolioItem } from '@/app/admin/types/portfolio'
 import { connectDB } from '@/utils/db'
 
@@ -29,9 +29,9 @@ export default async function Page({ params: slug }: Props) {
         initData={initData}
         button={
           <Flex gap={10}>
-            <FormButton text='글 수정하기' isSubmit />
+            <FormButton text='수정' isSubmit />
             <FormButton
-              text='글 삭제하기'
+              text='삭제'
               deleteApi='/api/portfolio/delete'
               redirectPath='/admin/portfolio'
             />

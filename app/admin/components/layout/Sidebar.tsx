@@ -1,5 +1,8 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+import Lottie from 'react-lottie-player'
+
 import {
   CopyOutlined,
   SettingOutlined,
@@ -7,12 +10,11 @@ import {
   GlobalOutlined,
   LogoutOutlined
 } from '@ant-design/icons'
-import Lottie from 'react-lottie-player'
-import gradientLottie from '@/public/images/admin/gradient.json'
 import { Layout, Menu, MenuProps } from 'antd'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
+
+import gradientLottie from '@/public/images/admin/gradient.json'
 
 type MenuItem = Required<MenuProps>['items'][number]
 

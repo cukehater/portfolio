@@ -49,7 +49,7 @@ export default function AccountForm({ initData }: Props) {
         }
       })
 
-      message.success('계정 정보가 성공적으로 수정되었습니다')
+      message.success('수정이 완료되었습니다')
       return router.push('/admin/account/list')
     } catch (error) {
       console.error(error)
@@ -84,7 +84,7 @@ export default function AccountForm({ initData }: Props) {
             <Input
               placeholder='아이디를 입력해 주세요'
               allowClear
-              readOnly={Boolean(initData)}
+              disabled={Boolean(initData)}
             />
           </Form.Item>
 
@@ -126,7 +126,7 @@ export default function AccountForm({ initData }: Props) {
           </Form.Item>
         </div>
       </CardContainer>
-      <FormButton text={initData ? '수정하기' : '생성하기'} isSubmit />
+      <FormButton text={initData ? '수정' : '생성'} isSubmit />
     </Form>
   )
 }

@@ -4,12 +4,12 @@ import { connectDB } from '@/utils/db'
 
 export async function POST(req: NextRequest) {
   try {
-    const { body: data } = await req.json()
+    const { body } = await req.json()
 
     const db = (await connectDB).db('portfolio')
-    await db.collection('portfolio').insertOne(data)
+    await db.collection('portfolio').insertOne(body)
 
-    return NextResponse.json({ message: 'Success', data }, { status: 200 })
+    return NextResponse.json({ message: 'Success' }, { status: 200 })
   } catch (error: any) {
     console.error('Error processing request:', error)
 

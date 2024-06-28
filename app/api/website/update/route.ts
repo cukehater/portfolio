@@ -5,7 +5,6 @@ import { connectDB } from '@/utils/db'
 
 export async function POST(req: NextRequest) {
   const { body } = await req.json()
-  console.log('body', body)
 
   try {
     const db = (await connectDB).db('portfolio')

@@ -5,7 +5,7 @@ import { connectDB } from '@/utils/db'
 import CardContainer from '../../components/shared/CardContainer'
 import CommonTitle from '../../components/shared/CommonTitle'
 import FormButton from '../../components/shared/FormButton'
-import PortfolioCard from '../../components/shared/PortfolioCard'
+import PortfolioCard from '../../components/shared/portfolio/PortfolioCard'
 import { PortfolioItem } from '../../types/portfolio'
 
 export default async function Page() {
@@ -29,7 +29,7 @@ export default async function Page() {
         )}
       </CardContainer>
 
-      <FormButton text='글 작성하기' redirectPath='/admin/portfolio/write' />
+      <FormButton text='작성' redirectPath='/admin/portfolio/write' />
     </>
   )
 }

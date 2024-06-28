@@ -3,16 +3,25 @@
 import { useEffect, useState } from 'react'
 
 import { PlusOutlined } from '@ant-design/icons'
-import { DatePicker, Form, Input, Select, Slider, Upload, message } from 'antd'
+import {
+  ColorPicker,
+  DatePicker,
+  Form,
+  Input,
+  Select,
+  Slider,
+  Upload,
+  message
+} from 'antd'
 import axios from 'axios'
 import dayjs from 'dayjs'
 import { useParams, useRouter } from 'next/navigation'
 
+import { PortfolioItem } from '@/app/admin/types/portfolio'
 import { uploadProps } from '@/utils/uploadProps'
 
-import { PortfolioItem } from '../../types/portfolio'
-import CardContainer from '../shared/CardContainer'
-import { selectProtocol, selectTopLevel } from '../shared/SelectAfterBefore'
+import CardContainer from '../CardContainer'
+import { selectProtocol, selectTopLevel } from '../SelectAfterBefore'
 
 interface Props {
   initData?: PortfolioItem
@@ -21,8 +30,11 @@ interface Props {
 
 export default function PortfolioForm({ initData, button }: Props) {
   const { slug } = useParams()
-  const router = useRouter()
   const [initValues, setInitValues] = useState({})
+
+  const router = useRouter()
+
+  const [hex, setHex] = useState('')
 
   const handleFinish = async (values: PortfolioItem) => {
     try {
@@ -31,7 +43,7 @@ export default function PortfolioForm({ initData, button }: Props) {
         : '/api/portfolio/create'
 
       const res = await axios.post(apiUrl, {
-        body: values
+        body: { ...values, hex }
       })
 
       if (res.status === 200) {
@@ -51,7 +63,8 @@ export default function PortfolioForm({ initData, button }: Props) {
       period: initData.period && [
         dayjs(initData.period[0]),
         dayjs(initData.period[1])
-      ]
+      ],
+      brandColor: initData.hex
     }))
   }, [initData])
 
@@ -94,6 +107,18 @@ export default function PortfolioForm({ initData, button }: Props) {
             // rules={[{ required: true, message: '날짜를 입력해 주세요' }]}
           >
             <DatePicker.RangePicker placeholder={['시작일', '종료일']} />
+          </Form.Item>
+
+          <Form.Item
+            name='brandColor'
+            label='브랜드 컬러'
+            // rules={[{ required: true, message: '브랜드 컬러를 입력해 주세요' }]}
+          >
+            <ColorPicker
+              showText
+              disabledAlpha
+              onChangeComplete={color => setHex(color.toHex())}
+            />
           </Form.Item>
 
           <Form.Item

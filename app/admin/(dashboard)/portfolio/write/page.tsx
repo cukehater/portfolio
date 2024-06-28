@@ -1,6 +1,6 @@
-import FormButton from '@/app/admin/components/shared/FormButton'
 import CommonTitle from '@/app/admin/components/shared/CommonTitle'
-import PortfolioForm from '@/app/admin/components/shared/PortfolioForm'
+import FormButton from '@/app/admin/components/shared/FormButton'
+import PortfolioForm from '@/app/admin/components/shared/portfolio/PortfolioForm'
 
 export default function Page() {
   return (
